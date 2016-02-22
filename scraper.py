@@ -66,19 +66,19 @@ scraperwiki.sqlite.execute("create table Signal_History (`TIDM` varchar2(8) NOT 
 #####for record in reader:
 #####        print record
 
-    response = br.open(url + lsecode)
+response = br.open(url + lsecode)
 
-    for pagenum in range(1):
-        html = response.read()
+for pagenum in range(1):
+    html = response.read()
     
 #comp = re.search(r'MainContent_CompanyTicker(\w{3,}\.AX)span', html).group(0)
 #ASX_Code = '3PL.AX'
   
 #print re.findall(r'MainContent_signalpagehistory_PatternHistory24((.)+)\<\\table\>', html) 
-        test1 = re.search(r'MainContent_signalpagehistory_PatternHistory24_DXDataRow0((.|\n)+)MainContent_signalpagehistory_PatternHistory24_IADD', html)
+    test1 = re.search(r'MainContent_signalpagehistory_PatternHistory24_DXDataRow0((.|\n)+)MainContent_signalpagehistory_PatternHistory24_IADD', html)
 
-        if test1:
-            test1 = test1.group(0)
+    if test1:
+        test1 = test1.group(0)
     
 
 # test2 = re.findall(r'(\"\>|img\/)((.)+)\<\/td\>\<td', test1)
@@ -91,7 +91,7 @@ scraperwiki.sqlite.execute("create table Signal_History (`TIDM` varchar2(8) NOT 
 #test2 = re.findall('(\">|img\/)(.*?)(<\/|\.gif)', test1.replace("\B", ""))
 
 #test3 = re.findall('\', \'(.*?)\', \'', test2)
-            test3 = re.findall('(\">|img\/)(.*?)(<\/|\.gif)', test1.replace("\B", ""))
+        test3 = re.findall('(\">|img\/)(.*?)(<\/|\.gif)', test1.replace("\B", ""))
 #print "".join(test3[0].split)
 #test4 = [x.replace(" ", "") for x in test3]
 
@@ -101,20 +101,20 @@ scraperwiki.sqlite.execute("create table Signal_History (`TIDM` varchar2(8) NOT 
 #print len(test3)
 #print ""
 
-            while len(test3) >= 5:
+        while len(test3) >= 5:
     
-                #print ASX_Code
-                sh_Date = re.search("(\w|\d)(.*)(\w|\d)", str(test3.pop(0)).replace(" ", "")).group(0)
-                sh_Price = re.search("(\w|\d)(.*)(\w|\d)", str(test3.pop(0)).replace(" ", "")).group(0)
-                sh_Signal = re.search("(\w|\d)(.*)(\w|\d)", str(test3.pop(0)).replace(" ", "")).group(0)
-                sh_Confirmation = (re.search("[Unc|C]heck", str(test3.pop(0)).replace(" ", "")).group(0).lower().replace("uncheck","N")).replace("check", "Y")
-                sh_GBP100 = re.search("(\w|\d)(.*)(\w|\d)", str(test3.pop(0)).replace(" ", "")).group(0)
+            #print ASX_Code
+            sh_Date = re.search("(\w|\d)(.*)(\w|\d)", str(test3.pop(0)).replace(" ", "")).group(0)
+            sh_Price = re.search("(\w|\d)(.*)(\w|\d)", str(test3.pop(0)).replace(" ", "")).group(0)
+            sh_Signal = re.search("(\w|\d)(.*)(\w|\d)", str(test3.pop(0)).replace(" ", "")).group(0)
+            sh_Confirmation = (re.search("[Unc|C]heck", str(test3.pop(0)).replace(" ", "")).group(0).lower().replace("uncheck","N")).replace("check", "Y")
+            sh_GBP100 = re.search("(\w|\d)(.*)(\w|\d)", str(test3.pop(0)).replace(" ", "")).group(0)
         
         #scraperwiki.sqlite.execute("insert or replace into Signal_History values (:`ASX code`, :Date, :Price, :Signal, :Confirmation, :`AUD 100`)",  {"ASX code":ASX_Code, "Date":sh_Date, "Price":sh_Price, "Signal":sh_Signal, "Confirmation":sh_Confirmation, "AUD 100":sh_AUD100})
 
-                scraperwiki.sqlite.execute("insert or ignore into Signal_History values (?, ?, ?, ?, ?, ?)",  [lsecode, sh_Date, sh_Price, sh_Signal, sh_Confirmation, sh_GBP100]) 
+            scraperwiki.sqlite.execute("insert or ignore into Signal_History values (?, ?, ?, ?, ?, ?)",  [lsecode, sh_Date, sh_Price, sh_Signal, sh_Confirmation, sh_GBP100]) 
 
-                scraperwiki.sqlite.commit()    
+            scraperwiki.sqlite.commit()    
 
    
   # print re.search(r'\w{3}\.AX', re.search(r'MainContent_CompanyTicker((.)+)span', html).group(0)).group(0)
