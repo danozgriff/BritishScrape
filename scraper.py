@@ -94,7 +94,7 @@ if 1==1:
             if poscnt == 2:
                 price = tuple[1].replace(",", "")
             if poscnt == 4:
-                scraperwiki.sqlite.save(["TIDM"], data={"TIDM":tidm + '.L'), "Company":company, "Price":price, "Volume":tuple[1].replace(",", ""), "Date":datetime.datetime.now()}, table_name='company')
+                scraperwiki.sqlite.save(["TIDM"], data={"TIDM":tidm+'.L', "Company":company, "Price":price, "Volume":tuple[1].replace(",", ""), "Date":datetime.datetime.now()}, table_name='company')
                 scraperwiki.sqlite.commit() 
             if len(tuple[1]) <= 4 and tuple[1][-1:].isalpha() and tuple[1][-1:].isupper() and tuple[1]!=tidm:
                 count = count+1
