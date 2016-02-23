@@ -73,16 +73,18 @@ for pagenum in range(1):
     tuples = re.findall(r'(\">|\'>)(.*?)<\/', str(test1.replace(" ", "")).replace("><", ""))
     count = 0
     tidm = ""
+    company = ""
+    price = 0
     poscnt = 0
     for tuple in tuples:
         if poscnt == 1:
-            scraperwiki.sqlite.save(["TIDM"], data={"TIDM":tidm, "Company":tuple[1].replace("amp;", "")}, table_name='company')
-            scraperwiki.sqlite.commit()
+            #scraperwiki.sqlite.save(["TIDM"], data={"TIDM":tidm, "Company":tuple[1].replace("amp;", "")}, table_name='company')
+            company = tuple[1].replace("amp;", "")
+            #scraperwiki.sqlite.commit()
         if poscnt == 2:
-            scraperwiki.sqlite.save(["TIDM"], data={"Price":tuple[1]}, table_name='company')
-            scraperwiki.sqlite.commit()
+            price = tuple[1]
         if poscnt == 5:
-            scraperwiki.sqlite.save(["TIDM"], data={"Volume":tuple[1]}, table_name='company')
+            scraperwiki.sqlite.save(["TIDM"], data={"TIDM":tidm, "Company":company, "Price":price, "Volume":tuple[1]}, table_name='company')
             scraperwiki.sqlite.commit()
         if len(tuple[1]) <= 4 and tuple[1][-1:].isalpha() and tuple[1][-1:].isupper() and tuple[1]!=tidm:
             count = count+1
