@@ -153,6 +153,10 @@ url = 'https://www.britishbulls.com/SignalPage.aspx?lang=en&Ticker='
 #scraperwiki.sqlite.execute("delete from Signal_History")
 #scraperwiki.sqlite.commit()
 
+scraperwiki.sqlite.execute("drop table if exists Signal_History")  
+scraperwiki.sqlite.execute("create table Signal_History (`TIDM` varchar2(8) NOT NULL, `Date` date NOT NULL, `Price` real NOT NULL, `Signal` varchar2(15) NOT NULL, `Confirmation` char(1) NOT NULL, `GBP 100` real NOT NULL, UNIQUE (`TIDM`, `Date`))")
+
+
 lselist = scraperwiki.sqlite.execute("select `TIDM` from company")
 
 for x in lselist["data"]:
