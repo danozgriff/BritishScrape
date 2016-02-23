@@ -8,19 +8,21 @@ import datetime
 
 #scraperwiki.sqlite.execute("create table Company_Performance (`TIDM` varchar2(8) NOT NULL, `1D` real, `3D` real, `1W` real, '1M' real, '6M' real,  `Date` date, UNIQUE (`TIDM`, `Date`))")
  
-complist = scraperwiki.sqlite.execute("select `TIDM`, `Price` from company where TIDM in (select distinct TIDM from Signal_History)")
-
-tmp1 = 0.00
+if 1==0: 
+ 
+   complist = scraperwiki.sqlite.execute("select `TIDM`, `Price` from company where TIDM in (select distinct TIDM from Signal_History)")
     
-for x in complist["data"]:
-    #print x[0]
-    tmp1 = tmp1 + double(x[1])
-    print tmp1
+   tmp1 = 0.00
+        
+   for x in complist["data"]:
+       #print x[0]
+       tmp1 = tmp1 + double(x[1])
+       print tmp1
 
 #------------------------------------------------
 #------------------------------------------------
 
-if 1==0:
+if 1==1:
 
     url = 'http://www.shareprices.com/ftseallshare'
     
@@ -44,8 +46,8 @@ if 1==0:
     #scraperwiki.sqlite.execute("alter table company rename column `Date Added` to `Last Refreshed`")
     #scraperwiki.sqlite.execute("alter table company add `Top 500` char(1)")
     
-    #scraperwiki.sqlite.execute("drop table if exists company")  
-    #scraperwiki.sqlite.execute("create table company (`TIDM` string, `Company` string, `Price` real, `Volume` real, `Date` date NOT NULL)")
+    scraperwiki.sqlite.execute("drop table if exists company")  
+    scraperwiki.sqlite.execute("create table company (`TIDM` string, `Company` string, `Price` numeric(6,2), `Volume` real, `Date` date NOT NULL)")
     #scraperwiki.sqlite.execute("drop table if exists Signal_History")  
     #scraperwiki.sqlite.execute("create table Signal_History (`ASX code` varchar2(8) NOT NULL, `Date` date NOT NULL, `Price` real NOT NULL, `Signal` varchar2(15) NOT NULL, `Confirmation` char(1) NOT NULL, `AUD 100` real NOT NULL, UNIQUE (`ASX code`, `Date`))")
     
