@@ -78,15 +78,14 @@ for pagenum in range(1):
     price = 0
     poscnt = 0
     for tuple in tuples:
-        print tuple[1]
         if poscnt == 1:
             #scraperwiki.sqlite.save(["TIDM"], data={"TIDM":tidm, "Company":tuple[1].replace("amp;", "")}, table_name='company')
             company = tuple[1].replace("amp;", "")
             #scraperwiki.sqlite.commit()
         if poscnt == 2:
-            price = tuple[1]
-        if poscnt == 5:
-            scraperwiki.sqlite.save(["TIDM"], data={"TIDM":tidm, "Company":company, "Price":price, "Volume":tuple[1], "Date":datetime.datetime.now()}, table_name='company')
+            price = tuple[1]replace(",", "")
+        if poscnt == 4:
+            scraperwiki.sqlite.save(["TIDM"], data={"TIDM":tidm, "Company":company, "Price":price, "Volume":tuple[1]replace(",", ""), "Date":datetime.datetime.now()}, table_name='company')
             scraperwiki.sqlite.commit() 
         if len(tuple[1]) <= 4 and tuple[1][-1:].isalpha() and tuple[1][-1:].isupper() and tuple[1]!=tidm:
             count = count+1
