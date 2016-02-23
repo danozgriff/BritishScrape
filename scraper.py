@@ -20,7 +20,8 @@ if 1==1:
        tidm=x[0]
        nprice=x[1]
       # ndate=dt.datetime.today().strftime("%Y/%m/%d")
-       ndate=datetime.datetime.now().date()
+       ndate=datetime.date.today()
+       ndate=datetime.datetime(ndate.year, ndate.month, ndate.day)
 
 #D-1
 
