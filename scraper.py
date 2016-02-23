@@ -2,7 +2,7 @@ import scraperwiki
 import mechanize
 import re
 import csv
-import datetime
+from datetime import datetime, timedelta
 #import sqlite3
 
 
