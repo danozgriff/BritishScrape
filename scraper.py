@@ -8,7 +8,7 @@ import datetime
 
 #scraperwiki.sqlite.execute("create table Company_Performance (`TIDM` varchar2(8) NOT NULL, `1D` real, `3D` real, `1W` real, '1M' real, '6M' real,  `Date` date, UNIQUE (`TIDM`, `Date`))")
  
-complist = scraperwiki.sqlite.execute("select Company.TIDM, Company.Company from company inner join Signal_History on Company.TIDM = Signal_History.TIDM")
+complist = scraperwiki.sqlite.execute("select `Company.TIDM`, `Company.Company` from company inner join Signal_History on Company.TIDM = Signal_History.TIDM")
     
 for x in complist["data"]:
     print x[0]
