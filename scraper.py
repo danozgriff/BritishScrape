@@ -12,11 +12,24 @@ if 1==1:
  
    complist = scraperwiki.sqlite.execute("select `TIDM`, `Price` from company where TIDM in (select distinct TIDM from Signal_History)")
 
-Tmp1=0.0
+#Tmp1=0.0
         
    for x in complist["data"]:
-       Tmp1=tmp1+x[1]
-       Print tmp1
+       #Tmp1=tmp1+x[1]
+       #Print tmp1
+       tidm=x[0]
+       nprice=x[1]
+      # ndate=dt.datetime.today().strftime("%Y/%m/%d")
+       ndate=datetime.date(dt.year, dt.month, dt.day)
+
+#D-1
+
+       d1list = scraperwiki.sqlite.execute("select `Price` from Signal_History where tidm = " + tidm + " and date = " + (ndate - timedelta(days=1))
+
+       for y in d1list["data"]:
+           print y[0]
+
+       
 
 #------------------------------------------------
 #------------------------------------------------
