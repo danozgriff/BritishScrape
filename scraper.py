@@ -17,7 +17,7 @@ for x in complist["data"]:
 #------------------------------------------------
 #------------------------------------------------
 
-if 1==0:
+if 1==1:
 
     url = 'http://www.shareprices.com/ftseallshare'
     
@@ -94,7 +94,7 @@ if 1==0:
             if poscnt == 2:
                 price = tuple[1].replace(",", "")
             if poscnt == 4:
-                scraperwiki.sqlite.save(["TIDM"], data={"TIDM":tidm, "Company":company, "Price":price, "Volume":tuple[1].replace(",", ""), "Date":datetime.datetime.now()}, table_name='company')
+                scraperwiki.sqlite.save(["TIDM"], data={"TIDM":tidm.append('.L'), "Company":company, "Price":price, "Volume":tuple[1].replace(",", ""), "Date":datetime.datetime.now()}, table_name='company')
                 scraperwiki.sqlite.commit() 
             if len(tuple[1]) <= 4 and tuple[1][-1:].isalpha() and tuple[1][-1:].isupper() and tuple[1]!=tidm:
                 count = count+1
@@ -171,7 +171,7 @@ if 1==0:
     lselist = scraperwiki.sqlite.execute("select `TIDM` from company")
     
     for x in lselist["data"]:
-        lsecode = str(x)[3:-2] + '.L'
+        lsecode = str(x)[3:-2] #+ '.L'
         #print lsecode
         #print str(asxlist["data"][x])[3:-2]
     
