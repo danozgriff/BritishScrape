@@ -24,7 +24,7 @@ if 1==1:
 
 #D-1
 
-       d1list = scraperwiki.sqlite.execute("select `Price` from Signal_History where tidm = " + tidm + " and date = " + (ndate - timedelta(days=1))
+       d1list = scraperwiki.sqlite.execute("select `Price` from Signal_History where tidm = " + tidm + " and date = " + (ndate - timedelta(days=1))")
 
        for y in d1list["data"]:
            print y[0]
