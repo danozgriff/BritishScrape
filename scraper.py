@@ -97,7 +97,7 @@ if 1==1:
                 company = tuple[1].replace("amp;", "")
                 #scraperwiki.sqlite.commit()
             if poscnt == 2:
-                price = float((tuple[1].replace(",", "")).replace.("p", ""))
+                price = float(tuple[1].replace(",|r", ""))
             if poscnt == 4:
                 scraperwiki.sqlite.save(["TIDM"], data={"TIDM":tidm+'.L', "Company":company, "Price":price, "Volume":tuple[1].replace(",", ""), "Date":datetime.datetime.now()}, table_name='company')
                 scraperwiki.sqlite.commit() 
