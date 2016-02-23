@@ -11,13 +11,13 @@ import datetime
 complist = scraperwiki.sqlite.execute("select `TIDM`, `Price` from company where TIDM in (select distinct TIDM from Signal_History)")
     
 for x in complist["data"]:
-    print x[0]
+    #print x[0]
     print x[1]
 
 #------------------------------------------------
 #------------------------------------------------
 
-if 1==1:
+if 1==0:
 
     url = 'http://www.shareprices.com/ftseallshare'
     
