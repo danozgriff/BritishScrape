@@ -47,7 +47,7 @@ if 1==1:
     #scraperwiki.sqlite.execute("alter table company add `Top 500` char(1)")
     
     scraperwiki.sqlite.execute("drop table if exists company")  
-    scraperwiki.sqlite.execute("create table company (`TIDM` string, `Company` string, `Price` numeric(6,2), `Volume` real, `Date` date NOT NULL)")
+    scraperwiki.sqlite.execute("create table company (`TIDM` string, `Company` string, `Price` real, `Volume` real, `Date` date NOT NULL)")
     #scraperwiki.sqlite.execute("drop table if exists Signal_History")  
     #scraperwiki.sqlite.execute("create table Signal_History (`ASX code` varchar2(8) NOT NULL, `Date` date NOT NULL, `Price` real NOT NULL, `Signal` varchar2(15) NOT NULL, `Confirmation` char(1) NOT NULL, `AUD 100` real NOT NULL, UNIQUE (`ASX code`, `Date`))")
     
@@ -97,7 +97,7 @@ if 1==1:
                 company = tuple[1].replace("amp;", "")
                 #scraperwiki.sqlite.commit()
             if poscnt == 2:
-                price = tuple[1].replace(",", "")
+                price = tuple[1].replace(",", "").replace.("p", "")
             if poscnt == 4:
                 scraperwiki.sqlite.save(["TIDM"], data={"TIDM":tidm+'.L', "Company":company, "Price":price, "Volume":tuple[1].replace(",", ""), "Date":datetime.datetime.now()}, table_name='company')
                 scraperwiki.sqlite.commit() 
