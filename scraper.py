@@ -78,6 +78,7 @@ for pagenum in range(1):
     price = 0
     poscnt = 0
     for tuple in tuples:
+        print tuple[1]
         if poscnt == 1:
             #scraperwiki.sqlite.save(["TIDM"], data={"TIDM":tidm, "Company":tuple[1].replace("amp;", "")}, table_name='company')
             company = tuple[1].replace("amp;", "")
