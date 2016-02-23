@@ -9,10 +9,13 @@ import datetime
 #scraperwiki.sqlite.execute("create table Company_Performance (`TIDM` varchar2(8) NOT NULL, `1D` real, `3D` real, `1W` real, '1M' real, '6M' real,  `Date` date, UNIQUE (`TIDM`, `Date`))")
  
 complist = scraperwiki.sqlite.execute("select `TIDM`, `Price` from company where TIDM in (select distinct TIDM from Signal_History)")
+
+tmp1 = 0
     
 for x in complist["data"]:
     #print x[0]
-    print x[1]
+    tmp1 = tmp1 + x[1]
+    print tmp1
 
 #------------------------------------------------
 #------------------------------------------------
