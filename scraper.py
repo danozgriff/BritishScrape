@@ -11,10 +11,12 @@ import datetime
 if 1==1: 
  
    complist = scraperwiki.sqlite.execute("select `TIDM`, `Price` from company where TIDM in (select distinct TIDM from Signal_History)")
+
+Tmp1=0.0
         
    for x in complist["data"]:
-       print x[0]
-       print x[1]
+       Tmp1=tmp1+x[1]
+       Print tmp1
 
 #------------------------------------------------
 #------------------------------------------------
