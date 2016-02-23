@@ -2,6 +2,7 @@ import scraperwiki
 import mechanize
 import re
 import csv
+import datetime
 #import sqlite3
 
 #------------------------------------------------
@@ -84,7 +85,7 @@ for pagenum in range(1):
         if poscnt == 2:
             price = tuple[1]
         if poscnt == 5:
-            scraperwiki.sqlite.save(["TIDM"], data={"TIDM":tidm, "Company":company, "Price":price, "Volume":tuple[1], "Date":date('now')}, table_name='company')
+            scraperwiki.sqlite.save(["TIDM"], data={"TIDM":tidm, "Company":company, "Price":price, "Volume":tuple[1], "Date":datetime.datetime.now()}, table_name='company')
             scraperwiki.sqlite.commit()
         if len(tuple[1]) <= 4 and tuple[1][-1:].isalpha() and tuple[1][-1:].isupper() and tuple[1]!=tidm:
             count = count+1
