@@ -30,7 +30,7 @@ br.addheaders = [('User-agent', 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.
 #scraperwiki.sqlite.execute("alter table company add `Top 500` char(1)")
 
 scraperwiki.sqlite.execute("drop table if exists company")  
-scraperwiki.sqlite.execute("create table company (`TIDM` string, `Company` string)")
+scraperwiki.sqlite.execute("create table company (`TIDM` string, `Company` string, `Price` real NOT NULL, `Volume` real NOT NULL, `Date` date NOT NULL)")
 #scraperwiki.sqlite.execute("drop table if exists Signal_History")  
 #scraperwiki.sqlite.execute("create table Signal_History (`ASX code` varchar2(8) NOT NULL, `Date` date NOT NULL, `Price` real NOT NULL, `Signal` varchar2(15) NOT NULL, `Confirmation` char(1) NOT NULL, `AUD 100` real NOT NULL, UNIQUE (`ASX code`, `Date`))")
 
@@ -78,6 +78,12 @@ for pagenum in range(1):
         if poscnt == 1:
             scraperwiki.sqlite.save(["TIDM"], data={"TIDM":tidm, "Company":tuple[1].replace("amp;", "")}, table_name='company')
             scraperwiki.sqlite.commit()
+        if poscnt == 2:
+            scraperwiki.sqlite.save(["TIDM"], data={"Price":tuple[1]}, table_name='company')
+            scraperwiki.sqlite.commit()
+        if poscnt == 5:
+            scraperwiki.sqlite.save(["TIDM"], data={"Volume":tuple[1]}, table_name='company')
+            scraperwiki.sqlite.commit()
         if len(tuple[1]) <= 4 and tuple[1][-1:].isalpha() and tuple[1][-1:].isupper() and tuple[1]!=tidm:
             count = count+1
             #print tuple[1]
@@ -85,7 +91,7 @@ for pagenum in range(1):
             tidm = tuple[1]
             poscnt = 1
         else:
-            poscnt = 0    
+            poscnt = poscnt + 1    
         
         
     print count
