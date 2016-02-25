@@ -8,7 +8,7 @@ import datetime
 
 #scraperwiki.sqlite.execute("create table Company_Performance (`TIDM` varchar2(8) NOT NULL, `1D` real, `3D` real, `1W` real, '1M' real, '6M' real,  `Date` date, UNIQUE (`TIDM`, `Date`))")
  
-if 1==1: 
+if 1==10: 
  
    complist = scraperwiki.sqlite.execute("select `TIDM`, `Price` from company where TIDM in (select distinct TIDM from Signal_History)")
 
@@ -32,7 +32,10 @@ if 1==1:
            print y[0]
 
        
-
+if 1=1:
+     ndate=datetime.date.today()
+     ndate.year
+     #strftime('%Y', ndate)
 #------------------------------------------------
 #------------------------------------------------
 
