@@ -8,7 +8,7 @@ import datetime
 
 #scraperwiki.sqlite.execute("create table Company_Performance (`TIDM` varchar2(8) NOT NULL, `1D` real, `3D` real, `1W` real, '1M' real, '6M' real,  `Date` date, UNIQUE (`TIDM`, `Date`))")
  
-if 1==1: 
+if 1==0: 
  
    complist = scraperwiki.sqlite.execute("select `TIDM`, `Price` from company where TIDM in (select distinct TIDM from Signal_History)")
 
@@ -36,12 +36,12 @@ if 1==1:
        break    
        
        
-if 1==0:
+if 1==1:
      tidm = "test"
      ndate=datetime.date.today()
      d1date=ndate - datetime.timedelta(days=10)
      print d1date
-     print "select `Price` from Signal_History where tidm = '" + tidm + "' and strftime('%Y', date) = '" + str(d1date.year) + "' and	strftime('%-m', date) = '" + str(d1date.month) + "' and	strftime('%-d', date) = '" + str(d1date.day) + "'"
+     print "select `Price` from Signal_History where tidm = '" + tidm + "' and strftime('%Y', date) = " + strftime('%Y', d1date))
      #ndate=datetime.date.today()
      #print ndate.year
      #strftime('%Y', ndate)
