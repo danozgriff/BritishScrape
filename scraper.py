@@ -34,7 +34,7 @@ if 1==10:
        
 if 1==1:
      ndate=datetime.date.today()
-     ndate.year
+     print ndate.year
      #strftime('%Y', ndate)
 #------------------------------------------------
 #------------------------------------------------
