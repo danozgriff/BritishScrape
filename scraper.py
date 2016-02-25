@@ -37,7 +37,7 @@ if 1==1:
      tidm = "test"
      ndate=datetime.date.today()
      d1date=ndate - datetime.timedelta(days=10)
-     print "select `Price` from Signal_History where tidm = '" + tidm + "' and 	strftime('%Y', date) = '" + str(d1date.year) + "' and	strftime('%m', date) = '" + str(d1date.month) + "' and	strftime('%d', date) = '" + str(d1date.day) + "'"
+     print "select `Price` from Signal_History where tidm = '" + tidm + "' and strftime('%Y', date) = '" + str(d1date.year) + "' and	strftime('%mm', date) = '" + str(d1date.month) + "' and	strftime('%dd', date) = '" + str(d1date.day) + "'"
      #ndate=datetime.date.today()
      #print ndate.year
      #strftime('%Y', ndate)
