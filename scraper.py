@@ -25,13 +25,13 @@ if 1==1:
 
 #D-1
 
-       d1date=ndate - datetime.timedelta(days=1)
+       d1date=ndate - datetime.timedelta(days=10)
        d1list = scraperwiki.sqlite.execute("select `Price` from Signal_History where tidm = '" + tidm + "' and 	strftime('%Y', date) = '" + str(d1date.year) + "' and	strftime('%m', date) = '" + str(d1date.month) + "' and	strftime('%d', date) = '" + str(d1date.day) + "'")
 
        for y in d1list["data"]:
            print y[0]
-           break
-       break
+           #break
+       #break
        
 if 1==0:
      ndate=datetime.date.today()
