@@ -21,11 +21,12 @@ if 1==1:
        nprice=x[1]
       # ndate=dt.datetime.today().strftime("%Y/%m/%d")
        ndate=datetime.date.today()
-       ndate=datetime.datetime(ndate.year, ndate.month, ndate.day)
+       #ndate=datetime.datetime(ndate.year, ndate.month, ndate.day)
 
 #D-1
 
-       d1list = scraperwiki.sqlite.execute("select `Price` from Signal_History where tidm = " + tidm + " and date = " + (ndate - datetime.timedelta(days=1)))
+       d1date=ndate - datetime.timedelta(days=1)
+       d1list = scraperwiki.sqlite.execute("select `Price` from Signal_History where tidm = " + tidm + " and 	strftime('%Y', date) = " + d1date.year + " and	strftime('%m', date) = " + d1date.month + " and	strftime('%d', date) = " + d1date.day)
 
        for y in d1list["data"]:
            print y[0]
