@@ -302,6 +302,7 @@ if 1==1:
                 #print ASX_Code
                     sh_Date = re.search("(\w|\d)(.*)(\w|\d)", str(test3.pop(0)).replace(" ", "")).group(0)
                     sh_Date = substr(sh_Date, 7,4) + '-' + substr(sh_Date, 4,2) + '-' + substr(sh_Date, 1,2)
+                    sh_Date = sh_Date[7:] + '-' + sh_Date[4:6] + '-' + sh_Date[1:3]
                     sh_Price = re.search("(\w|\d)(.*)(\w|\d)", str(test3.pop(0)).replace(" ", "")).group(0)
                     sh_Signal = re.search("(\w|\d)(.*)(\w|\d)", str(test3.pop(0)).replace(" ", "")).group(0)
                     sh_Confirmation = (re.search("[Unc|C]heck", str(test3.pop(0)).replace(" ", "")).group(0).lower().replace("uncheck","N")).replace("check", "Y")
