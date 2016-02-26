@@ -301,6 +301,7 @@ if 1==1:
         
                 #print ASX_Code
                     sh_Date = re.search("(\w|\d)(.*)(\w|\d)", str(test3.pop(0)).replace(" ", "")).group(0)
+                    sh_Date = substr(sh_Date, 7,4) + '-' + substr(sh_Date, 4,2) + '-' + substr(sh_Date, 1,2)
                     sh_Price = re.search("(\w|\d)(.*)(\w|\d)", str(test3.pop(0)).replace(" ", "")).group(0)
                     sh_Signal = re.search("(\w|\d)(.*)(\w|\d)", str(test3.pop(0)).replace(" ", "")).group(0)
                     sh_Confirmation = (re.search("[Unc|C]heck", str(test3.pop(0)).replace(" ", "")).group(0).lower().replace("uncheck","N")).replace("check", "Y")
@@ -308,7 +309,7 @@ if 1==1:
             
             #scraperwiki.sqlite.execute("insert or replace into Signal_History values (:`ASX code`, :Date, :Price, :Signal, :Confirmation, :`AUD 100`)",  {"ASX code":ASX_Code, "Date":sh_Date, "Price":sh_Price, "Signal":sh_Signal, "Confirmation":sh_Confirmation, "AUD 100":sh_AUD100})
     
-                    scraperwiki.sqlite.execute("insert or ignore into Signal_History values (?, ?, ?, ?, ?, ?)",  [lsecode, date(sh_Date), sh_Price, sh_Signal, sh_Confirmation, sh_GBP100]) 
+                    scraperwiki.sqlite.execute("insert or ignore into Signal_History values (?, Date(?), ?, ?, ?, ?)",  [lsecode, sh_Date, sh_Price, sh_Signal, sh_Confirmation, sh_GBP100]) 
     
                     scraperwiki.sqlite.commit()    
     
