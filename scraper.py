@@ -39,12 +39,12 @@ if 1==1:
        #d1list = scraperwiki.sqlite.execute("select `TIDM`, `Price`, `Date` from Signal_History where tidm = '" + tidm + "' and Date = '%d'" % (d1date))
        print  "%s-%s-%s" % (d1date.day, d1date.month, d1date.year)
        print " "
-       d1list = scraperwiki.sqlite.execute("select `TIDM`, julianday(Date('Date')) from Signal_History where tidm = '" + tidm + "' and Date < '%s-%s-%s' group by `TIDM`" % (d1date.year, d1date.month, d1date.day))
+       d1list = scraperwiki.sqlite.execute("select `TIDM`, `Date`, strftime('%Y',Date) from Signal_History where tidm = '" + tidm + "' and Date < '%s-%s-%s' group by `TIDM`" % (d1date.year, d1date.month, d1date.day))
        
        for y in d1list["data"]:
            print y[0]
            print y[1]
-           #print y[2]
+           print y[2]
        break   
        
        
