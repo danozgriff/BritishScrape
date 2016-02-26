@@ -38,7 +38,7 @@ if 1==1:
            print y[1]
            print y[2]
            print y[3]
-       break    
+          
        
        
 if 1==0:
