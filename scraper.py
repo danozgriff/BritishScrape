@@ -36,13 +36,14 @@ if 1==1:
        #if len(d1list["data"]) = 0:
        #    d1list = scraperwiki.sqlite.execute("select Max(Date) from Signal_History where tidm = '" + tidm + "' and substr(Date, 1, 2) = '%s' and substr(Date, 4, 2) = '%s' and substr(Date, 7, 4) = '%s'" % (d1date.strftime('%d'), d1date.strftime('%m'), d1date.strftime('%Y')))
        
-       d1list = scraperwiki.sqlite.execute("select `TIDM`, `Price`, `Date` from Signal_History where tidm = '" + tidm + "' and Date = '%d'" % (d1date))
+       #d1list = scraperwiki.sqlite.execute("select `TIDM`, `Price`, `Date` from Signal_History where tidm = '" + tidm + "' and Date = '%d'" % (d1date))
+       d1list = scraperwiki.sqlite.execute("select Max(Date) from Signal_History where tidm = '" + tidm + "' and Date < '%s-%s-%s'" % (d1date.day, d1date.month, d1date.year))
        
        for y in d1list["data"]:
            print y[0]
-           print y[1]
-           print y[2]
-          
+           #print y[1]
+           #print y[2]
+       break   
        
        
 if 1==0:
