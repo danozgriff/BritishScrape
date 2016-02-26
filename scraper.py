@@ -43,7 +43,7 @@ if 1==1:
      ndate=datetime.date.today()
      d1date=ndate - datetime.timedelta(days=10)
      print d1date
-     print """select `TIDM`, `Price`, `Date` from Signal_History where tidm = '" + tidm + "' and strftime('%Y', date)= ?""", (str(d1date.month),) )
+     print "select `TIDM`, `Price`, `Date` from Signal_History where tidm = '" + tidm + "' and strftime('%Y', date)= ?", str(d1date.month)
      #ndate=datetime.date.today()
      #print ndate.year
      #strftime('%Y', ndate)
