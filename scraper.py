@@ -31,7 +31,7 @@ if 1==1:
        #d1list = scraperwiki.sqlite.execute("select `TIDM`, `Price`, `Date` from Signal_History where tidm = '" + tidm + "' and CAST(strftime('%m', Datde) AS INTEGER) > 1")
        #d1list = scraperwiki.sqlite.execute("select `TIDM`, `Price`, `Date` from Signal_History where tidm = '" + tidm + "' and strftime('%Y-%m-%d',Date) = '2016-02-15'")
        #d1list = scraperwiki.sqlite.execute("select `TIDM`, `Price`, `Date` from Signal_History where tidm = '" + tidm + "' and strftime('%%Y',date,'unixepoch') = '%s'"%(str(d1date.year)))
-       d1list = scraperwiki.sqlite.execute("select `TIDM`, `Price`, `Date`, substr(Date, 1, 4) from Signal_History As SH where tidm = '" + tidm + "'")
+       d1list = scraperwiki.sqlite.execute("select `TIDM`, `Price`, `Date`, substr(Date, 1, 4) from Signal_History where tidm = '" + tidm + "' and substr(Date, 1, 2) = '%s'"%str(d1date.day) )
        
        for y in d1list["data"]:
            print y[0]
