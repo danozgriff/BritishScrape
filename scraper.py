@@ -9,7 +9,7 @@ import time
 
 #scraperwiki.sqlite.execute("create table Company_Performance (`TIDM` varchar2(8) NOT NULL, `1D` real, `3D` real, `1W` real, '1M' real, '6M' real,  `Date` date, UNIQUE (`TIDM`, `Date`))")
  
-if 1==0: 
+if 1==1: 
  
    complist = scraperwiki.sqlite.execute("select `TIDM`, `Price` from company where TIDM in (select distinct TIDM from Signal_History)")
 
@@ -194,7 +194,7 @@ if 1==0:
 #------------------------------------------------
 #------------------------------------------------
 
-if 1==1:
+if 1==0:
 
     url = 'https://www.britishbulls.com/SignalPage.aspx?lang=en&Ticker='
     
