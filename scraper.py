@@ -304,7 +304,7 @@ if 1==1:
                     sh_Date = re.search("(\w|\d)(.*)(\w|\d)", str(test3.pop(0)).replace(" ", "")).group(0)
                     #sh_Date = substr(sh_Date, 7,4) + '-' + substr(sh_Date, 4,2) + '-' + substr(sh_Date, 1,2)
                     #sh_Date = sh_Date[6:10] + '-' + sh_Date[3:5] + '-' + sh_Date[:2]
-                    sh_Date = date(sh_Date[6:10],sh_Date[3:5],sh_Date[:2])
+                    sh_Date = date(int(sh_Date[6:10]),int(sh_Date[3:5]),int(sh_Date[:2]))
                     sh_Price = re.search("(\w|\d)(.*)(\w|\d)", str(test3.pop(0)).replace(" ", "")).group(0)
                     sh_Signal = re.search("(\w|\d)(.*)(\w|\d)", str(test3.pop(0)).replace(" ", "")).group(0)
                     sh_Confirmation = (re.search("[Unc|C]heck", str(test3.pop(0)).replace(" ", "")).group(0).lower().replace("uncheck","N")).replace("check", "Y")
