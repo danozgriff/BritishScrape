@@ -36,7 +36,7 @@ if 1==1:
        
        d1list = scraperwiki.sqlite.execute("select `TIDM`, `Date`, strftime('%%m',Date) from Signal_History where tidm = '%s' and Date = '%s'" % (tidm, d1date))
        
-       if len(d1list["data"]) = 0:
+       if len(d1list["data"]) == 0:
            d1maxdate = scraperwiki.sqlite.execute("select max(`Date`) from Signal_History where tidm = '%s' and Date < '%s'" % (tidm, d1date))
            print d1maxdate
            break
