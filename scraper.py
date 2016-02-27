@@ -54,7 +54,7 @@ if 1==1:
      datetime.date.today()
      d1date=ndate - datetime.timedelta(days=10)
      print d1date
-     print ""select `TIDM`, strftime('%m',Date,'unixepoch') from Signal_History where tidm = '" + tidm + "' and Date < '%s-%s-%s'" % (d1date.year, d1date.month, d1date.day)
+     print ""select `TIDM`, strftime('%m',Date,'unixepoch') from Signal_History where tidm = '" + tidm + "' and Date < '%s-%s-%s'" % (str(d1date.year), str(d1date.month), str(d1date.day))
      #ndate=datetime.date.today()
      #print ndate.year
      #strftime('%Y', ndate)
