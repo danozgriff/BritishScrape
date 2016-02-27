@@ -9,7 +9,7 @@ import time
 
 #scraperwiki.sqlite.execute("create table Company_Performance (`TIDM` varchar2(8) NOT NULL, `1D` real, `3D` real, `1W` real, '1M' real, '6M' real,  `Date` date, UNIQUE (`TIDM`, `Date`))")
  
-if 1==1: 
+if 1==0: 
  
    complist = scraperwiki.sqlite.execute("select `TIDM`, `Price` from company where TIDM in (select distinct TIDM from Signal_History)")
 
@@ -194,7 +194,7 @@ if 1==0:
 #------------------------------------------------
 #------------------------------------------------
 
-if 1==0:
+if 1==1:
 
     url = 'https://www.britishbulls.com/SignalPage.aspx?lang=en&Ticker='
     
@@ -310,7 +310,7 @@ if 1==0:
             
             #scraperwiki.sqlite.execute("insert or replace into Signal_History values (:`ASX code`, :Date, :Price, :Signal, :Confirmation, :`AUD 100`)",  {"ASX code":ASX_Code, "Date":sh_Date, "Price":sh_Price, "Signal":sh_Signal, "Confirmation":sh_Confirmation, "AUD 100":sh_AUD100})
     
-                    scraperwiki.sqlite.execute("insert or ignore into Signal_History values (?, ?, ?, ?, ?, ?)",  [lsecode, sh_Date, sh_Price, sh_Signal, sh_Confirmation, sh_GBP100]) 
+                    scraperwiki.sqlite.execute("insert or ignore into Signal_History values (?, Date('?'), ?, ?, ?, ?)",  [lsecode, sh_Date, sh_Price, sh_Signal, sh_Confirmation, sh_GBP100]) 
     
                     scraperwiki.sqlite.commit()    
     
