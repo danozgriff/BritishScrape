@@ -27,28 +27,31 @@ if 1==1:
 
 #D-1
 
-       d1date=ndate - datetime.timedelta(days=30)
+       d1date=ndate - datetime.timedelta(days=1)
        #d1list = scraperwiki.sqlite.execute("select `Price` from Signal_History where tidm = '" + tidm + "' and strftime('%Y', date) = '" + str(d1date.year) + "' and	strftime('%-m', date) = '" + str(d1date.month) + "' and	strftime('%-d', date) = '" + str(d1date.day) + "'")
        #d1list = scraperwiki.sqlite.execute("select `TIDM`, `Price`, `Date` from Signal_History where tidm = '" + tidm + "' and CAST(strftime('%m', Datde) AS INTEGER) > 1")
        #d1list = scraperwiki.sqlite.execute("select `TIDM`, `Price`, `Date` from Signal_History where tidm = '" + tidm + "' and strftime('%Y-%m-%d',Date) = '2016-02-15'")
        #d1list = scraperwiki.sqlite.execute("select `TIDM`, `Price`, `Date` from Signal_History where tidm = '" + tidm + "' and strftime('%%Y',date,'unixepoch') = '%s'"%(str(d1date.year)))
        #d1list = scraperwiki.sqlite.execute("select `TIDM`, `Price`, `Date` from Signal_History where tidm = '" + tidm + "' and substr(Date, 1, 2) = '%s' and substr(Date, 4, 2) = '%s' and substr(Date, 7, 4) = '%s'" % (d1date.strftime('%d'), d1date.strftime('%m'), d1date.strftime('%Y')))
        
-       #if len(d1list["data"]) = 0:
-       #    d1list = scraperwiki.sqlite.execute("select Max(Date) from Signal_History where tidm = '" + tidm + "' and substr(Date, 1, 2) = '%s' and substr(Date, 4, 2) = '%s' and substr(Date, 7, 4) = '%s'" % (d1date.strftime('%d'), d1date.strftime('%m'), d1date.strftime('%Y')))
+       d1list = scraperwiki.sqlite.execute("select `TIDM`, `Date`, strftime('%%m',Date) from Signal_History where tidm = '%s' and Date = '%s'" % (tidm, d1date))
        
+       if len(d1list["data"]) = 0:
+           d1maxdate = scraperwiki.sqlite.execute("select max(`Date`) from Signal_History where tidm = '%s' and Date < '%s'" % (tidm, d1date))
+           print d1maxdate
+           break
        #d1list = scraperwiki.sqlite.execute("select `TIDM`, `Price`, `Date` from Signal_History where tidm = '" + tidm + "' and Date = '%d'" % (d1date))
-       print  "%s-%s-%s" % (d1date.strftime('%Y'), d1date.strftime('%m'), d1date.strftime('%d'))
-       print " "
+       #print  "%s-%s-%s" % (d1date.strftime('%Y'), d1date.strftime('%m'), d1date.strftime('%d'))
+       #print " "
        #d1list = scraperwiki.sqlite.execute("select `TIDM`, `Date`, strftime('%m',Date,'unixepoch') from Signal_History where tidm = '" + tidm + "' and Date > '%s-%s-%s'" % (d1date.strftime('%Y'), d1date.strftime('%m'), d1date.strftime('%d')))
-       d1list = scraperwiki.sqlite.execute("select `TIDM`, `Date`, strftime('%%m',Date) from Signal_History where tidm = '%s' and Date > '%s'" % (tidm, d1date))
+       #d1list = scraperwiki.sqlite.execute("select `TIDM`, `Date`, strftime('%%m',Date) from Signal_History where tidm = '%s' and Date > '%s'" % (tidm, d1date))
        
        #d1list = scraperwiki.sqlite.execute("select `TIDM`, `Date`, strftime('%m',SH.Date) from Signal_History as SH where tidm = '" + tidm + "' and SH.Date > '2015-01-15'") # '%s-%s-%s' group by `TIDM`" % (d1date.year, d1date.month, d1date.day))
-       for y in d1list["data"]:
-           print y[0]
-           print y[1]
-           print y[2]
-       break   
+       #for y in d1list["data"]:
+       #    print y[0]
+       #    print y[1]
+       #    print y[2]
+       #break   
        
        
 if 1==0:
