@@ -9,7 +9,7 @@ import time
 
 #scraperwiki.sqlite.execute("create table Company_Performance (`TIDM` varchar2(8) NOT NULL, `1D` real, `3D` real, `1W` real, '1M' real, '6M' real,  `Date` date, UNIQUE (`TIDM`, `Date`))")
  
-if 1==0: 
+if 1==1: 
  
    complist = scraperwiki.sqlite.execute("select `TIDM`, `Price` from company where TIDM in (select distinct TIDM from Signal_History)")
 
@@ -39,8 +39,8 @@ if 1==0:
        #d1list = scraperwiki.sqlite.execute("select `TIDM`, `Price`, `Date` from Signal_History where tidm = '" + tidm + "' and Date = '%d'" % (d1date))
        print  "%s-%s-%s" % (d1date.day, d1date.month, d1date.year)
        print " "
-       d1list = scraperwiki.sqlite.execute("select `TIDM`, `Date`, strftime('%m',Date,'unixepoch') from Signal_History where tidm = '" + tidm + "' and Date < '%s-%s-%s' group by `TIDM`" % (d1date.year, d1date.month, d1date.day))
-       
+       #d1list = scraperwiki.sqlite.execute("select `TIDM`, `Date`, strftime('%m',Date,'unixepoch') from Signal_History where tidm = '" + tidm + "' and Date < '%s-%s-%s' group by `TIDM`" % (d1date.year, d1date.month, d1date.day))
+       d1list = scraperwiki.sqlite.execute("select `TIDM`, `Date`, strftime('%m',SH.Date) from Signal_History as SH where tidm = '" + tidm + "' and SH.Date > '2016-01-15'") # '%s-%s-%s' group by `TIDM`" % (d1date.year, d1date.month, d1date.day))
        for y in d1list["data"]:
            print y[0]
            print y[1]
@@ -194,7 +194,7 @@ if 1==0:
 #------------------------------------------------
 #------------------------------------------------
 
-if 1==1:
+if 1==0:
 
     url = 'https://www.britishbulls.com/SignalPage.aspx?lang=en&Ticker='
     
