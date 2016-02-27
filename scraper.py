@@ -2,8 +2,8 @@ import scraperwiki
 import mechanize
 import re
 import csv
-import datetime
 import time
+from datetime import datetime, date
 #import sqlite3
 
 
