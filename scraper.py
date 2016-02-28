@@ -12,7 +12,7 @@ import datetime
  
 if 1==1: 
  
-   complist = scraperwiki.sqlite.execute("select `TIDM`, `Price` from company where TIDM in (select distinct TIDM from Signal_History)")
+   complist = scraperwiki.sqlite.execute("select `TIDM`, `Price`, `Date` from company where TIDM in (select distinct TIDM from Signal_History)")
 
 
 #Tmp1=0.0
@@ -23,13 +23,14 @@ if 1==1:
        #tidm=x[0]
        tidm='III.L'
        nprice=x[1]
+       ndate=x[2]
       # ndate=dt.datetime.today().strftime("%Y/%m/%d")
-       ndate=datetime.date.today()
+       todaydate=datetime.date.today()
        #ndate=datetime.datetime(ndate.year, ndate.month, ndate.day)
 
 #D-1
 
-       d1date=ndate - datetime.timedelta(days=10)
+       d1date=todaydate - datetime.timedelta(days=10)
        #d1list = scraperwiki.sqlite.execute("select `Price` from Signal_History where tidm = '" + tidm + "' and strftime('%Y', date) = '" + str(d1date.year) + "' and	strftime('%-m', date) = '" + str(d1date.month) + "' and	strftime('%-d', date) = '" + str(d1date.day) + "'")
        #d1list = scraperwiki.sqlite.execute("select `TIDM`, `Price`, `Date` from Signal_History where tidm = '" + tidm + "' and CAST(strftime('%m', Datde) AS INTEGER) > 1")
        #d1list = scraperwiki.sqlite.execute("select `TIDM`, `Price`, `Date` from Signal_History where tidm = '" + tidm + "' and strftime('%Y-%m-%d',Date) = '2016-02-15'")
@@ -40,14 +41,25 @@ if 1==1:
        
        if len(d1list["data"]) == 0:
            #d1maxdate = scraperwiki.sqlite.execute("select max(`Date`) from Signal_History where tidm = '%s' and Date < '%s'" % (tidm, d1date))
-           d1maxdate = scraperwiki.sqlite.execute("select `Date`, `Price` from Signal_History where tidm = '%s' and Date in (select max(`Date`) from Signal_History where tidm = '%s' and Date < '%s')" % (tidm, tidm, d1date))
-           d2maxdate = scraperwiki.sqlite.execute("select `Date`, `Price` from Signal_History where tidm = '%s' and Date in (select min(`Date`) from Signal_History where tidm = '%s' and Date > '%s')" % (tidm, tidm, d1date))
-           for y in d1maxdate["data"]:
-                MinDate = y[0]
-                MinPrice = y[1]
-           for z in d2maxdate["data"]:
-                MaxDate = z[0]
-                MaxPrice = z[1]
+           d1mindate = scraperwiki.sqlite.execute("select `Date`, `Price` from Signal_History where tidm = '%s' and Date in (select max(`Date`) from Signal_History where tidm = '%s' and Date < '%s')" % (tidm, tidm, d1date))
+           
+           if len(d1mindate["data"]) == 0:
+               MinDate = 0
+               MinPrice = 0
+           else: 
+               for y in d1mindate["data"]:
+                    MinDate = y[0]
+                    MinPrice = y[1]
+           
+               d1maxdate = scraperwiki.sqlite.execute("select `Date`, `Price` from Signal_History where tidm = '%s' and Date in (select min(`Date`) from Signal_History where tidm = '%s' and Date > '%s')" % (tidm, tidm, d1date))
+               
+               if len(d1maxdate["data"]) == 0:
+                   MaxDate=ndate
+                   MaxPrice=nprice
+               else:
+                   for z in d1maxdate["data"]:
+                        MaxDate = z[0]
+                        MaxPrice = z[1]
            print MinDate
            print MinPrice
            print MaxDate
