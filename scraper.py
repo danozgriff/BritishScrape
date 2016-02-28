@@ -74,10 +74,10 @@ if 1==1:
                PriceDelta = MaxPrice - MinPrice
                PriceInterval = PriceDelta / MinMaxDelta.days
                CalcPrice = MinPrice+Belowdelta.days*PriceInterval
-               print MinPrice
-               print Belowdelta.days
-               print PriceInterval
+               D1PC = (CalcPrice - nprice) / nprice
                print CalcPrice
+               print nprice
+               print D1PC
            #print 'Delta: %d' % (delta.days)
        else:
            for a in d1list["data"]: 
