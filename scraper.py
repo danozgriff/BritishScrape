@@ -21,7 +21,7 @@ if 1==1:
        #Tmp1=tmp1+x[1]
        #Print tmp1
        #tidm=x[0]
-       tidm='III.L'
+       tidm=x[0]
        nprice=x[1]
        ndate=x[2]
       # ndate=dt.datetime.today().strftime("%Y/%m/%d")
