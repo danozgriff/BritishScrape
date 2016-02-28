@@ -10,7 +10,7 @@ import datetime
 
 #scraperwiki.sqlite.execute("create table Company_Performance (`TIDM` varchar2(8) NOT NULL, `1D` real, `3D` real, `1W` real, '1M' real, '6M' real,  `Date` date, UNIQUE (`TIDM`, `Date`))")
  
-if 1==1: 
+if 1==0: 
  
    complist = scraperwiki.sqlite.execute("select `TIDM`, `Price`, `Date` from company where TIDM in (select distinct TIDM from Signal_History)")
 
@@ -106,7 +106,7 @@ if 1==0:
 #------------------------------------------------
 #------------------------------------------------
 
-if 1==0:
+if 1==1:
 
     url = 'http://www.shareprices.com/ftseallshare'
     
@@ -183,7 +183,7 @@ if 1==0:
             if poscnt == 2:
                 price = tuple[1].replace(",", "").replace("p", "")
             if poscnt == 4:
-                scraperwiki.sqlite.save(["TIDM"], data={"TIDM":tidm+'.L', "Company":company, "Price":price, "Volume":tuple[1].replace(",", ""), "Date":datetime.datetime.now()}, table_name='company')
+                scraperwiki.sqlite.save(["TIDM"], data={"TIDM":tidm+'.L', "Company":company, "Price":price, "Volume":tuple[1].replace(",", ""), "Date":datetime.date.today()}, table_name='company')
                 scraperwiki.sqlite.commit() 
             if len(tuple[1]) <= 4 and tuple[1][-1:].isalpha() and tuple[1][-1:].isupper() and tuple[1]!=tidm:
                 count = count+1
