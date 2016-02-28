@@ -49,7 +49,7 @@ if 1==1:
            print MaxDate
        else:
            for a in d1list["data"]: 
-               MatchDate = y[0]
+               MatchDate = a[0]
                print MatchDate
                 
            #    print MinDate
