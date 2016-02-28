@@ -72,7 +72,7 @@ if 1==1:
            if Abovedelta.days > Belowdelta.days:
                MinMaxDelta = MaxDate - MinDate
                PriceDelta = MaxPrice - MinPrice
-               PriceInterval = PriceDelta / MinMaxDelta
+               PriceInterval = PriceDelta / float(MinMaxDelta)
                CalcPrice = nprice+Belowdelta*PriceInterval
                print CalcPrice
            #print 'Delta: %d' % (delta.days)
