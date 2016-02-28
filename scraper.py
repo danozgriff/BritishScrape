@@ -65,6 +65,7 @@ if 1==1:
            print MaxDate
            print MaxPrice
            #delta = Date(MaxDate) - Date(MinDate)
+           print d1date
            Abovedelta = MaxDate - d1date
            Belowdelta = d1date - MinDate
            
