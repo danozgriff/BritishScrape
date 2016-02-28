@@ -30,7 +30,7 @@ if 1==1:
 
 #D-1
 
-       d1date=todaydate - datetime.timedelta(days=10)
+       d1date=todaydate - datetime.timedelta(days=15)
        #d1list = scraperwiki.sqlite.execute("select `Price` from Signal_History where tidm = '" + tidm + "' and strftime('%Y', date) = '" + str(d1date.year) + "' and	strftime('%-m', date) = '" + str(d1date.month) + "' and	strftime('%-d', date) = '" + str(d1date.day) + "'")
        #d1list = scraperwiki.sqlite.execute("select `TIDM`, `Price`, `Date` from Signal_History where tidm = '" + tidm + "' and CAST(strftime('%m', Datde) AS INTEGER) > 1")
        #d1list = scraperwiki.sqlite.execute("select `TIDM`, `Price`, `Date` from Signal_History where tidm = '" + tidm + "' and strftime('%Y-%m-%d',Date) = '2016-02-15'")
@@ -69,15 +69,21 @@ if 1==1:
            Abovedelta = MaxDate - d1date
            Belowdelta = d1date - MinDate
            
-           if Abovedelta.days > Belowdelta.days:
-               MinMaxDelta = MaxDate - MinDate
-               PriceDelta = MaxPrice - MinPrice
-               PriceInterval = PriceDelta / MinMaxDelta.days
+           MinMaxDelta = MaxDate - MinDate
+           PriceDelta = MaxPrice - MinPrice
+           PriceInterval = PriceDelta / MinMaxDelta.days
+           
+           if Abovedelta.days >= Belowdelta.days:
+               print "below"
                CalcPrice = MinPrice+Belowdelta.days*PriceInterval
-               D1PC = (nprice - CalcPrice) / CalcPrice
-               print CalcPrice
-               print nprice
-               print D1PC
+           else:
+               print "above"
+               CalcPrice = MaxPrice-Abovedelta.days*PriceInterval
+               
+           D1PC = (nprice - CalcPrice) / CalcPrice
+           print CalcPrice
+           print nprice
+           print D1PC 
            #print 'Delta: %d' % (delta.days)
        else:
            for a in d1list["data"]: 
