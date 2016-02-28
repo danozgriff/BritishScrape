@@ -48,7 +48,7 @@ if 1==1:
                MinPrice = 0
            else: 
                for y in d1mindate["data"]:
-                    MinDate = datetime.datetime.strptime(y[0], "%Y-%m-%d")
+                    MinDate = datetime.datetime.strptime(y[0], "%Y-%m-%d").date()
                     MinPrice = y[1]
            
                d1maxdate = scraperwiki.sqlite.execute("select `Date`, `Price` from Signal_History where tidm = '%s' and Date in (select min(`Date`) from Signal_History where tidm = '%s' and Date > '%s')" % (tidm, tidm, d1date))
@@ -58,7 +58,7 @@ if 1==1:
                    MaxPrice=nprice
                else:
                    for z in d1maxdate["data"]:
-                        MaxDate = datetime.datetime.strptime(z[0], "%Y-%m-%d")
+                        MaxDate = datetime.datetime.strptime(z[0], "%Y-%m-%d").date()
                         MaxPrice = z[1]
            print MinDate
            print MinPrice
