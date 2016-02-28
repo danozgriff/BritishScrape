@@ -14,12 +14,14 @@ if 1==1:
  
    complist = scraperwiki.sqlite.execute("select `TIDM`, `Price` from company where TIDM in (select distinct TIDM from Signal_History)")
 
+
 #Tmp1=0.0
         
    for x in complist["data"]:
        #Tmp1=tmp1+x[1]
        #Print tmp1
-       tidm=x[0]
+       #tidm=x[0]
+       tidm='III.L'
        nprice=x[1]
       # ndate=dt.datetime.today().strftime("%Y/%m/%d")
        ndate=datetime.date.today()
