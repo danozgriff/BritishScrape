@@ -64,6 +64,8 @@ if 1==1:
            print MinPrice
            print MaxDate
            print MaxPrice
+           delta = MaxDate - MinDate
+           print 'Delta: ' + delta.days
        else:
            for a in d1list["data"]: 
                MatchDate = a[0]
