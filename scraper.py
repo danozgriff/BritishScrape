@@ -74,7 +74,7 @@ if 1==1:
                PriceDelta = MaxPrice - MinPrice
                PriceInterval = PriceDelta / MinMaxDelta.days
                CalcPrice = MinPrice+Belowdelta.days*PriceInterval
-               D1PC = (CalcPrice - nprice) / nprice
+               D1PC = (nprice - CalcPrice) / CalcPrice
                print CalcPrice
                print nprice
                print D1PC
