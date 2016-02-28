@@ -30,7 +30,7 @@ if 1==1:
 
 #D-1
 
-       d1date=todaydate - datetime.timedelta(days=45)
+       d1date=todaydate - datetime.timedelta(days=10)
        #d1list = scraperwiki.sqlite.execute("select `Price` from Signal_History where tidm = '" + tidm + "' and strftime('%Y', date) = '" + str(d1date.year) + "' and	strftime('%-m', date) = '" + str(d1date.month) + "' and	strftime('%-d', date) = '" + str(d1date.day) + "'")
        #d1list = scraperwiki.sqlite.execute("select `TIDM`, `Price`, `Date` from Signal_History where tidm = '" + tidm + "' and CAST(strftime('%m', Datde) AS INTEGER) > 1")
        #d1list = scraperwiki.sqlite.execute("select `TIDM`, `Price`, `Date` from Signal_History where tidm = '" + tidm + "' and strftime('%Y-%m-%d',Date) = '2016-02-15'")
@@ -41,7 +41,7 @@ if 1==1:
        
        if len(d1list["data"]) == 0:
            #d1maxdate = scraperwiki.sqlite.execute("select max(`Date`) from Signal_History where tidm = '%s' and Date < '%s'" % (tidm, d1date))
-           d1mindate = scraperwiki.sqlite.execute("select `Date`, `Price` from Signal_History where tidm = '%s' and Date in (select max(`Date`) from Signal_History where tidm = '%s' and Date < '%s')" % (tidm, tidm, d1date))
+           d1mindate = scraperwiki.sqlite.execute("select `Date`, `GBP 100` from Signal_History where tidm = '%s' and Date in (select max(`Date`) from Signal_History where tidm = '%s' and Date < '%s')" % (tidm, tidm, d1date))
            
            if len(d1mindate["data"]) == 0:
                MinDate = 0
@@ -51,11 +51,11 @@ if 1==1:
                     MinDate = datetime.datetime.strptime(y[0], "%Y-%m-%d").date()
                     MinPrice = y[1]
            
-               d1maxdate = scraperwiki.sqlite.execute("select `Date`, `Price` from Signal_History where tidm = '%s' and Date in (select min(`Date`) from Signal_History where tidm = '%s' and Date > '%s')" % (tidm, tidm, d1date))
+               d1maxdate = scraperwiki.sqlite.execute("select `Date`, `GBP 100` from Signal_History where tidm = '%s' and Date in (select min(`Date`) from Signal_History where tidm = '%s' and Date > '%s')" % (tidm, tidm, d1date))
                
                if len(d1maxdate["data"]) == 0:
-                   MaxDate=ndate
-                   MaxPrice=nprice
+                   MaxDate=MinDate
+                   MaxPrice=MinPrice
                else:
                    for z in d1maxdate["data"]:
                         MaxDate = datetime.datetime.strptime(z[0], "%Y-%m-%d").date()
@@ -73,7 +73,7 @@ if 1==1:
            PriceDelta = MaxPrice - MinPrice
            PriceInterval = PriceDelta / MinMaxDelta.days
            
-           if Abovedelta.days >= Belowdelta.days:
+           if abs(Abovedelta.days) >= Belowdelta.days:
                print "below"
                CalcPrice = MinPrice+Belowdelta.days*PriceInterval
            else:
