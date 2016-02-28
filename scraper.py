@@ -41,10 +41,10 @@ if 1==1:
            d2maxdate = scraperwiki.sqlite.execute("select min(`Date`) from Signal_History where tidm = '%s' and Date > '%s'" % (tidm, d1date))
            for y in d1maxdate["data"]:
                 MinDate = y[0]
-           for y in d2maxdate["data"]:
-                MaxDate = y[0]
-          print MinDate
-          print MaxDate
+           for z in d2maxdate["data"]:
+                MaxDate = z[0]
+           print MinDate
+           print MaxDate
                 
                 
                 
