@@ -36,21 +36,28 @@ if 1==1:
        #d1list = scraperwiki.sqlite.execute("select `TIDM`, `Price`, `Date` from Signal_History where tidm = '" + tidm + "' and strftime('%%Y',date,'unixepoch') = '%s'"%(str(d1date.year)))
        #d1list = scraperwiki.sqlite.execute("select `TIDM`, `Price`, `Date` from Signal_History where tidm = '" + tidm + "' and substr(Date, 1, 2) = '%s' and substr(Date, 4, 2) = '%s' and substr(Date, 7, 4) = '%s'" % (d1date.strftime('%d'), d1date.strftime('%m'), d1date.strftime('%Y')))
        
-       d1list = scraperwiki.sqlite.execute("select `Date` from Signal_History where tidm = '%s' and Date = '%s'" % (tidm, d1date))
+       d1list = scraperwiki.sqlite.execute("select `Date`, `Price` from Signal_History where tidm = '%s' and Date = '%s'" % (tidm, d1date))
        
        if len(d1list["data"]) == 0:
-           d1maxdate = scraperwiki.sqlite.execute("select max(`Date`) from Signal_History where tidm = '%s' and Date < '%s'" % (tidm, d1date))
-           d2maxdate = scraperwiki.sqlite.execute("select min(`Date`) from Signal_History where tidm = '%s' and Date > '%s'" % (tidm, d1date))
+           #d1maxdate = scraperwiki.sqlite.execute("select max(`Date`) from Signal_History where tidm = '%s' and Date < '%s'" % (tidm, d1date))
+           d1maxdate = scraperwiki.sqlite.execute("select `Date`, `Price` from Signal_History where tidm = '%s' and Date in (select max(`Date`) from Signal_History where tidm = '%s' and Date < '%s')" % (tidm, tidm, d1date))
+           d2maxdate = scraperwiki.sqlite.execute("select `Date`, `Price` from Signal_History where tidm = '%s' and Date in (select min(`Date`) from Signal_History where tidm = '%s' and Date > '%s')" % (tidm, tidm, d1date))
            for y in d1maxdate["data"]:
                 MinDate = y[0]
+                MinPrice = y[1]
            for z in d2maxdate["data"]:
                 MaxDate = z[0]
+                MaxPrice = z[1]
            print MinDate
+           print MinPrice
            print MaxDate
+           print MaxPrice
        else:
            for a in d1list["data"]: 
                MatchDate = a[0]
+               MatchPrice = a[1]
                print MatchDate
+               print MatchPrice
                 
            #    print MinDate
            #print "Value : %s" %  d1maxdate.keys()
