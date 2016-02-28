@@ -67,7 +67,7 @@ if 1==1:
            #delta = Date(MaxDate) - Date(MinDate)
            delta = datetime.datetime.strptime(MaxDate, "%Y-%m-%d") - datetime.datetime.strptime(MinDate, "%Y-%m-%d")
            
-           print 'Delta: ' + delta.days
+           print 'Delta: %d' % (delta.days)
        else:
            for a in d1list["data"]: 
                MatchDate = a[0]
