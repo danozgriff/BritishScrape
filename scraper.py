@@ -65,7 +65,8 @@ if 1==1:
            print MaxDate
            print MaxPrice
            #delta = Date(MaxDate) - Date(MinDate)
-           delta = datetime.datetime.strptime(MaxDate, "YYYY-mm-dd") - datetime.datetime.strptime(MinDate, "YYYY-mm-dd")
+           delta = datetime.strptime(MaxDate, '%Y-%m-%d').date() - datetime.strptime(MinDate, '%Y-%m-%d').date()
+           
            print 'Delta: ' + delta.days
        else:
            for a in d1list["data"]: 
