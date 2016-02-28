@@ -38,7 +38,7 @@ if 1==1:
        
        if len(d1list["data"]) == 0:
            d1maxdate = scraperwiki.sqlite.execute("select max(`Date`) as MaxDate from Signal_History where tidm = '%s' and Date < '%s'" % (tidm, d1date))
-           MinDate = [y[0] for y in d1maxdate["data"]]
+           MinDate = str([y[0] for y in d1maxdate["data"]])
            print MinDate
            #for y in d1maxdate["data"]:
            #    MinDate = y[0]
