@@ -119,7 +119,10 @@ if 1==1:
            
            MinMaxDelta = MaxDate - MinDate
            PriceDelta = MaxPrice - MinPrice
-           PriceInterval = PriceDelta / MinMaxDelta.days
+           if PriceDelta == 0:
+               PriceInterval=0
+           else:
+               PriceInterval = PriceDelta / MinMaxDelta.days
            
            if abs(Abovedelta.days) >= Belowdelta.days:
                print "below"
