@@ -55,7 +55,7 @@ if 1==1:
                    if LatestSignal == 'BUY':
                        tprice = (LatestGDP100 + (LatestGDP100*ldiff))*Commission
                        print 'nprice %f' % (nprice)
-                       print 'nprice %f' % (LatestPrice)
+                       print 'LatestPrice %f' % (LatestPrice)
                        print 'LatestGDP100 %f' % (LatestGDP100)
                        print 'ldiff %f' % (ldiff)
                        print 'Commission %f' % (Commission)
