@@ -45,9 +45,9 @@ if 1==1:
     
            else: 
                for b in ldata["data"]:
-                   LatestDate = datetime.datetime.strptime(b[0], "%Y-%m-%d").date()
+                   #LatestDate = datetime.datetime.strptime(b[0], "%Y-%m-%d").date()
                    LatestGDP100 = b[1]
-                   LatestPrice = float(b[3])
+                   LatestPrice = b[2]
                    LatestSignal = b[3]
        
                    ldiff = (nprice - LatestPrice) / LatestPrice
