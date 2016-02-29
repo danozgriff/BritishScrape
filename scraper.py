@@ -59,6 +59,9 @@ if 1==1:
                #SELL etc
                else:
                    tprice = LatestPrice*.994
+           print 'Calc GDP 100 Today:'
+           print tdate
+           print tprice
 #------------------------------------------------------------
 
 #D-1   
