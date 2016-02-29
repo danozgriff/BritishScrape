@@ -39,33 +39,33 @@ if 1==1:
            
        else:
         
-           ldata = scraperwiki.sqlite.execute("select `Date`, `GBP 100`, `Signal` from Signal_History where tidm = '%s' and Date in (select max(`Date`) from Signal_History where tidm = '%s')" % (tidm, tidm))
+           ldata = scraperwiki.sqlite.execute("select `Date`, `GBP 100`, `Price`, `Signal` from Signal_History where tidm = '%s' and Date in (select max(`Date`) from Signal_History where tidm = '%s')" % (tidm, tidm))
            if len(ldata["data"]) == 0:
-                   LatestDate = 0
-                   LatestPrice = 0
+               tprice = 0
     
            else: 
                for b in ldata["data"]:
-                    LatestDate = datetime.datetime.strptime(b[0], "%Y-%m-%d").date()
-                    LatestPrice = b[1]
-                    LatestSignal = b[2]
+                   LatestDate = datetime.datetime.strptime(b[0], "%Y-%m-%d").date()
+                   LatestGDP100 = b[1]
+                   LatestPrice = b[3]
+                   LatestSignal = b[3]
        
-               if LatestSignal == 'BUY':
-                   ldiff = (nprice - LatestPrice) * LatestPrice
-                   tprice = (LatestPrice + (LatestPrice*ldiff))*Commission
-                   print 'nprice %d' % (nprice)
-                   print 'LatestPrice %d' % (LatestPrice)
-                   print 'ldiff %d' % (ldiff)
-                   print 'Commission %d' % (Commission)
-               elif LatestSignal == 'SHORT':
-                   ldiff = (nprice - LatestPrice) * LatestPrice
-                   tprice = (LatestPrice + (LatestPrice*(ldiff*-1)))*Commission
-               #SELL etc
-               else:
-                   tprice = LatestPrice*.994
-           print 'Current Calc GDP 100:'
-           print tdate
-           print tprice
+                   ldiff = (nprice - LatestPrice) / LatestPrice
+           
+                   if LatestSignal == 'BUY':
+                       tprice = (LatestGDP100 + (LatestGDP100*ldiff))*Commission
+                       print 'nprice %d' % (nprice)
+                       print 'LatestGDP100 %d' % (LatestGDP100)
+                       print 'ldiff %d' % (ldiff)
+                       print 'Commission %d' % (Commission)
+                   elif LatestSignal == 'SHORT':
+                       tprice = (LatestGDP100 + (LatestGDP100*(ldiff*-1)))*Commission
+                   #SELL etc
+                   else:
+                       tprice = LatestGDP100*.994
+               print 'Current Calc GDP 100:'
+               print tdate
+               print tprice
 #------------------------------------------------------------
 
 #D-1   
