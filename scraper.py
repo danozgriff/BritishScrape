@@ -44,21 +44,21 @@ if 1==1:
                    LatestDate = 0
                    LatestPrice = 0
     
-               else: 
-                   for b in d1mindate["data"]:
-                        LatestDate = datetime.datetime.strptime(b[0], "%Y-%m-%d").date()
-                        LatestPrice = b[1]
-                        LatestSignal = b[2]
-           
-                   if LatestSignal == 'BUY':
-                       ldiff = (nprice - LatestPrice) * LatestPrice
-                       tprice = (LatestPrice + (LatestPrice*ldiff))*Commission
-                   elif LatestSignal == 'SHORT':
-                       ldiff = (nprice - LatestPrice) * LatestPrice
-                       tprice = (LatestPrice + (LatestPrice*(ldiff*-1)))*Commission
-                   #SELL etc
-                   else:
-                       tprice = LatestPrice*.994
+           else: 
+               for b in d1mindate["data"]:
+                    LatestDate = datetime.datetime.strptime(b[0], "%Y-%m-%d").date()
+                    LatestPrice = b[1]
+                    LatestSignal = b[2]
+       
+               if LatestSignal == 'BUY':
+                   ldiff = (nprice - LatestPrice) * LatestPrice
+                   tprice = (LatestPrice + (LatestPrice*ldiff))*Commission
+               elif LatestSignal == 'SHORT':
+                   ldiff = (nprice - LatestPrice) * LatestPrice
+                   tprice = (LatestPrice + (LatestPrice*(ldiff*-1)))*Commission
+               #SELL etc
+               else:
+                   tprice = LatestPrice*.994
 #------------------------------------------------------------
 
 #D-1   
