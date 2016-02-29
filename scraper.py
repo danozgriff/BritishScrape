@@ -45,7 +45,7 @@ if 1==1:
                    LatestPrice = 0
     
            else: 
-               for b in d1mindate["data"]:
+               for b in ldata["data"]:
                     LatestDate = datetime.datetime.strptime(b[0], "%Y-%m-%d").date()
                     LatestPrice = b[1]
                     LatestSignal = b[2]
