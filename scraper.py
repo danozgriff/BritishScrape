@@ -53,13 +53,17 @@ if 1==1:
                if LatestSignal == 'BUY':
                    ldiff = (nprice - LatestPrice) * LatestPrice
                    tprice = (LatestPrice + (LatestPrice*ldiff))*Commission
+                   print 'nprice %d' % (nprice)
+                   print 'LatestPrice %d' % (LatestPrice)
+                   print 'ldiff %d' % (ldiff)
+                   print 'Commission %d' % (Commission)
                elif LatestSignal == 'SHORT':
                    ldiff = (nprice - LatestPrice) * LatestPrice
                    tprice = (LatestPrice + (LatestPrice*(ldiff*-1)))*Commission
                #SELL etc
                else:
                    tprice = LatestPrice*.994
-           print 'Calc GDP 100 Today:'
+           print 'Current Calc GDP 100:'
            print tdate
            print tprice
 #------------------------------------------------------------
