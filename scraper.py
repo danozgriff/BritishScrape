@@ -103,7 +103,7 @@ if 1==1:
                
                if len(d1maxdate["data"]) == 0:
                    MaxDate=tdate
-                   MaxPrice=tPrice
+                   MaxPrice=tprice
                else:
                    for z in d1maxdate["data"]:
                         MaxDate = datetime.datetime.strptime(z[0], "%Y-%m-%d").date()
