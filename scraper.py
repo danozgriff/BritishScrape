@@ -153,7 +153,7 @@ if 1==1:
 
            #for y in d1maxdate["data"]:
                #print y[0]
-       break
+       #break
        #d1list = scraperwiki.sqlite.execute("select `TIDM`, `Price`, `Date` from Signal_History where tidm = '" + tidm + "' and Date = '%d'" % (d1date))
        #print  "%s-%s-%s" % (d1date.strftime('%Y'), d1date.strftime('%m'), d1date.strftime('%d'))
        #print " "
