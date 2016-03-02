@@ -102,7 +102,7 @@ if 1==1:
                d1maxdate = scraperwiki.sqlite.execute("select `Date`, `GBP 100` from Signal_History where tidm = '%s' and Date in (select min(`Date`) from Signal_History where tidm = '%s' and Date > '%s')" % (tidm, tidm, d1date))
                
                if len(d1maxdate["data"]) == 0:
-                   MaxDate=tDate
+                   MaxDate=tdate
                    MaxPrice=tPrice
                else:
                    for z in d1maxdate["data"]:
