@@ -133,15 +133,15 @@ if 1==1:
                
            D1PC = (tprice - CalcPrice) / CalcPrice
            
-           print MinDate
-           print MaxDate
-           print MinPrice
-           print PriceInterval
-           print Belowdelta.days
-           print CalcPrice
+           print "mindate" + MinDate
+           print "MaxDate" + MaxDate
+           print "MinPrice" + MinPrice
+           print "PriceInterval" + PriceInterval
+           print "Belowdelta" + Belowdelta.days
+           print "CalcPrice" + CalcPrice
            #print tprice
-           print d1date
-           print D1PC 
+           print "d1date" + d1date
+           print "D1PC" + D1PC 
            #print 'Delta: %d' % (delta.days)
 
 
