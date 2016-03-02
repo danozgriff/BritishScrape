@@ -54,11 +54,11 @@ if 1==1:
            
                    if LatestSignal == 'BUY':
                        tprice = (LatestGDP100 + (LatestGDP100*ldiff))*Commission
-                       print 'nprice %f' % (nprice)
-                       print 'LatestPrice %f' % (LatestPrice)
-                       print 'LatestGDP100 %f' % (LatestGDP100)
-                       print 'ldiff %f' % (ldiff)
-                       print 'Commission %f' % (Commission)
+                       #print 'nprice %f' % (nprice)
+                       #print 'LatestPrice %f' % (LatestPrice)
+                       #print 'LatestGDP100 %f' % (LatestGDP100)
+                       #print 'ldiff %f' % (ldiff)
+                       #print 'Commission %f' % (Commission)
                    elif LatestSignal == 'SHORT':
                        tprice = (LatestGDP100 + (LatestGDP100*(ldiff*-1)))*Commission
                    #SELL etc
@@ -108,12 +108,12 @@ if 1==1:
                    for z in d1maxdate["data"]:
                         MaxDate = datetime.datetime.strptime(z[0], "%Y-%m-%d").date()
                         MaxPrice = z[1]
-           print MinDate
-           print MinPrice
-           print MaxDate
-           print MaxPrice
+           #print MinDate
+           #print MinPrice
+           #print MaxDate
+           #print MaxPrice
            #delta = Date(MaxDate) - Date(MinDate)
-           print d1date
+           #print d1date
            Abovedelta = MaxDate - d1date
            Belowdelta = d1date - MinDate
            
@@ -133,7 +133,8 @@ if 1==1:
                
            D1PC = (tprice - CalcPrice) / CalcPrice
            print CalcPrice
-           print tprice
+           #print tprice
+           print d1date
            print D1PC 
            #print 'Delta: %d' % (delta.days)
 
