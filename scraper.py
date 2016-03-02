@@ -134,6 +134,7 @@ if 1==1:
            D1PC = (tprice - CalcPrice) / CalcPrice
            
            print MinDate
+           print MaxDate
            print MinPrice
            print PriceInterval
            print Belowdelta.days
