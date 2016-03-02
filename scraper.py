@@ -132,6 +132,7 @@ if 1==1:
                CalcPrice = MaxPrice-Abovedelta.days*PriceInterval
                
            D1PC = (tprice - CalcPrice) / CalcPrice
+           print MinPrice
            print CalcPrice
            #print tprice
            print d1date
