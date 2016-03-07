@@ -20,9 +20,9 @@ if 1==1:
         
    for x in complist["data"]:
        #Tmp1=tmp1+x[1]
-       Print x[0]
        #tidm=x[0]
        tidm=x[0]
+       print tidm
        nprice=x[1]
        tdate=datetime.datetime.strptime(x[2], "%Y-%m-%d").date()
       # ndate=dt.datetime.today().strftime("%Y/%m/%d")
