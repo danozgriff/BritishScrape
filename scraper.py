@@ -36,7 +36,7 @@ if 1==1:
        ldata = scraperwiki.sqlite.execute("select `Price` from Signal_History where tidm = '%s' and Date = '%s'" % (tidm, tdate))
        if len(ldata["data"]) != 0:
            for c in d1mindate["data"]:
-               tprice = c[0]
+               tprice = float(c[0].replace(",", ""))
            
        else:
         
@@ -47,8 +47,8 @@ if 1==1:
            else: 
                for b in ldata["data"]:
                    #LatestDate = datetime.datetime.strptime(b[0], "%Y-%m-%d").date()
-                   LatestGDP100 = b[1]
-                   LatestPrice = float(b[2])
+                   LatestGDP100 = float(b[1].replace(",", ""))
+                   LatestPrice = float(b[2].replace(",", ""))
                    LatestSignal = b[3]
        
                    print 'nprice %f' % (nprice) 
@@ -87,7 +87,7 @@ if 1==1:
        if len(d1list["data"]) != 0:
            for a in d1list["data"]: 
                MatchDate = a[0]
-               MatchPrice = a[1]
+               MatchPrice = float(a[1].replace(",", ""))
                print MatchDate
                print MatchPrice 
        else:        
@@ -100,7 +100,7 @@ if 1==1:
            else: 
                for y in d1mindate["data"]:
                     MinDate = datetime.datetime.strptime(y[0], "%Y-%m-%d").date()
-                    MinPrice = y[1]
+                    MinPrice = float(y[1].replace(",", ""))
            
                d1maxdate = scraperwiki.sqlite.execute("select `Date`, `GBP 100` from Signal_History where tidm = '%s' and Date in (select min(`Date`) from Signal_History where tidm = '%s' and Date > '%s')" % (tidm, tidm, d1date))
                
@@ -110,7 +110,7 @@ if 1==1:
                else:
                    for z in d1maxdate["data"]:
                         MaxDate = datetime.datetime.strptime(z[0], "%Y-%m-%d").date()
-                        MaxPrice = z[1]
+                        MaxPrice = float(z[1].replace(",", ""))
            #print MinDate
            #print MinPrice
            #print MaxDate
