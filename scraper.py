@@ -23,9 +23,9 @@ import datetime
 
 if 1==1: 
  
-   #complist = scraperwiki.sqlite.execute("select `TIDM`, `Price`, `Date` from company where TIDM in (select distinct TIDM from Signal_History)")
+   complist = scraperwiki.sqlite.execute("select `TIDM`, `Price`, `Date` from company where TIDM in (select distinct TIDM from Signal_History)")
    #complist = scraperwiki.sqlite.execute("select `TIDM`, `Price`, `Date` from company where tidm = 'III.L'")
-   complist = scraperwiki.sqlite.execute("select `TIDM`, `Price`, `Date` from company")
+   #complist = scraperwiki.sqlite.execute("select `TIDM`, `Price`, `Date` from company")
 
 #Tmp1=0.0
         
@@ -62,8 +62,8 @@ if 1==1:
                    LatestPrice = b[2]
                    LatestSignal = b[3]
        
-                   print 'nprice %f' % (nprice) 
-                   print LatestPrice
+                   #print 'nprice %f' % (nprice) 
+                   #print LatestPrice
                    ldiff = (nprice - LatestPrice) / LatestPrice
            
                    if LatestSignal == 'BUY':
@@ -106,8 +106,8 @@ if 1==1:
            d1mindate = scraperwiki.sqlite.execute("select `Date`, `GBP 100` from Signal_History where tidm = '%s' and Date in (select max(`Date`) from Signal_History where tidm = '%s' and Date < '%s')" % (tidm, tidm, d1date))
            
            if len(d1mindate["data"]) == 0:
-               MinDate = 0
-               MinPrice = 0
+               MinDate = '1900-01-01' #datetime.datetime.strptime(y[0], "%Y-%m-%d").date()
+               MinPrice = 0.0
            else: 
                for y in d1mindate["data"]:
                     MinDate = datetime.datetime.strptime(y[0], "%Y-%m-%d").date()
