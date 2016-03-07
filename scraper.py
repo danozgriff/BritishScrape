@@ -21,7 +21,7 @@ import datetime
          
      #    scraperwiki.sqlite.execute("update Signal_History set `Price` = %f where tidm = '%s' and Date = '%s'" % (tidm, tdate))
 
-if 1==1: 
+if 1==0: 
  
    #complist = scraperwiki.sqlite.execute("select `TIDM`, `Price`, `Date` from company where TIDM in (select distinct TIDM from Signal_History)")
    complist = scraperwiki.sqlite.execute("select `TIDM`, `Price`, `Date` from company where tidm = 'SIG.L'")
@@ -195,7 +195,7 @@ if 1==0:
 #------------------------------------------------
 #------------------------------------------------
 
-if 1==0:
+if 1==1:
 
     url = 'http://www.shareprices.com/ftseallshare'
     
@@ -273,8 +273,8 @@ if 1==0:
                 price = tuple[1].replace(",", "").replace("p", "")
             if poscnt == 4:
                 scraperwiki.sqlite.save(["TIDM"], data={"TIDM":tidm+'.L', "Company":company, "Price":price, "Volume":tuple[1].replace(",", ""), "Date":datetime.date.today()}, table_name='company')
-                scraperwiki.sqlite.commit() 
-            if len(tuple[1]) <= 4 and tuple[1][-1:].isalpha() and tuple[1][-1:].isupper() and tuple[1]!=tidm:
+                scraperwiki.sqlite.commit()
+            if len(tuple[1]) <= 4 and tuple[1][-1:].isalpha() and tuple[1][-1:].isupper() and tuple[1]!=tidm and poscnt!=1:
                 count = count+1
                 #print tuple[1]
                 #scraperwiki.sqlite.save(["TIDM"], data={"TIDM":tuple[1]}, table_name='company')
