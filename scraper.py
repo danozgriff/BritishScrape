@@ -20,7 +20,7 @@ if 1==1:
         
    for x in complist["data"]:
        #Tmp1=tmp1+x[1]
-       Print tidm
+       Print x[0]
        #tidm=x[0]
        tidm=x[0]
        nprice=x[1]
