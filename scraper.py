@@ -21,7 +21,7 @@ import datetime
          
      #    scraperwiki.sqlite.execute("update Signal_History set `Price` = %f where tidm = '%s' and Date = '%s'" % (tidm, tdate))
 
-if 1==0: 
+if 1==1: 
  
    #complist = scraperwiki.sqlite.execute("select `TIDM`, `Price`, `Date` from company where TIDM in (select distinct TIDM from Signal_History)")
    #complist = scraperwiki.sqlite.execute("select `TIDM`, `Price`, `Date` from company where tidm = 'III.L'")
@@ -195,7 +195,7 @@ if 1==0:
 #------------------------------------------------
 #------------------------------------------------
 
-if 1==1:
+if 1==0:
 
     url = 'http://www.shareprices.com/ftseallshare'
     
@@ -329,7 +329,7 @@ if 1==1:
 #------------------------------------------------
 #------------------------------------------------
 
-if 1==1:
+if 1==0:
 
     url = 'https://www.britishbulls.com/SignalPage.aspx?lang=en&Ticker='
     
@@ -441,7 +441,7 @@ if 1==1:
                     sh_Date = date(int(sh_Date[6:10]),int(sh_Date[3:5]),int(sh_Date[:2]))
                     sh_Price = re.search("(\w|\d)(.*)(\w|\d)", str(test3.pop(0)).replace(" ", "").replace(",", "")).group(0)
                     sh_Signal = re.search("(\w|\d)(.*)(\w|\d)", str(test3.pop(0)).replace(" ", "")).group(0)
-                    sh_Confirmation = (re.search("[/Unc|/C]heck", str(test3.pop(0)).replace(" ", "")).group(0).lower().replace("/uncheck","N")).replace("/check", "Y")
+                    sh_Confirmation = ((re.search("[Unc|C]heck", str(test3.pop(0)).replace(" ", "")).group(0).lower()).replace("uncheck","N")).replace("check", "Y")
                     sh_GBP100 = re.search("(\w|\d)(.*)(\w|\d)", str(test3.pop(0)).replace(" ", "").replace(",", "")).group(0)
             
             #scraperwiki.sqlite.execute("insert or replace into Signal_History values (:`ASX code`, :Date, :Price, :Signal, :Confirmation, :`AUD 100`)",  {"ASX code":ASX_Code, "Date":sh_Date, "Price":sh_Price, "Signal":sh_Signal, "Confirmation":sh_Confirmation, "AUD 100":sh_AUD100})
