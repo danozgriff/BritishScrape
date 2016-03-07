@@ -9,8 +9,19 @@ import datetime
 
 
 #scraperwiki.sqlite.execute("create table Company_Performance (`TIDM` varchar2(8) NOT NULL, `1D` real, `3D` real, `1W` real, '1M' real, '6M' real,  `Date` date, UNIQUE (`TIDM`, `Date`))")
+#if 1==1:
  
-if 1==1: 
+ #    complist = scraperwiki.sqlite.execute("select `TIDM`, `Price` from Signal_History")
+
+#Tmp1=0.0
+        
+  #   for x in complist["data"]:
+   #      tidm=x[0]
+    #     price = x[1].replace(",", "")
+         
+     #    scraperwiki.sqlite.execute("update Signal_History set `Price` = %f where tidm = '%s' and Date = '%s'" % (tidm, tdate))
+
+if 1==0: 
  
    #complist = scraperwiki.sqlite.execute("select `TIDM`, `Price`, `Date` from company where TIDM in (select distinct TIDM from Signal_History)")
    #complist = scraperwiki.sqlite.execute("select `TIDM`, `Price`, `Date` from company where tidm = 'III.L'")
@@ -36,7 +47,7 @@ if 1==1:
        ldata = scraperwiki.sqlite.execute("select `Price` from Signal_History where tidm = '%s' and Date = '%s'" % (tidm, tdate))
        if len(ldata["data"]) != 0:
            for c in d1mindate["data"]:
-               tprice = float(c[0].replace(",", ""))
+               tprice = c[0]
            
        else:
         
@@ -47,8 +58,8 @@ if 1==1:
            else: 
                for b in ldata["data"]:
                    #LatestDate = datetime.datetime.strptime(b[0], "%Y-%m-%d").date()
-                   LatestGDP100 = float(b[1].replace(",", ""))
-                   LatestPrice = float(b[2].replace(",", ""))
+                   LatestGDP100 = b[1]
+                   LatestPrice = b[2]
                    LatestSignal = b[3]
        
                    print 'nprice %f' % (nprice) 
@@ -87,7 +98,7 @@ if 1==1:
        if len(d1list["data"]) != 0:
            for a in d1list["data"]: 
                MatchDate = a[0]
-               MatchPrice = float(a[1].replace(",", ""))
+               MatchPrice = a[1]
                print MatchDate
                print MatchPrice 
        else:        
@@ -100,7 +111,7 @@ if 1==1:
            else: 
                for y in d1mindate["data"]:
                     MinDate = datetime.datetime.strptime(y[0], "%Y-%m-%d").date()
-                    MinPrice = float(y[1].replace(",", ""))
+                    MinPrice = y[1]
            
                d1maxdate = scraperwiki.sqlite.execute("select `Date`, `GBP 100` from Signal_History where tidm = '%s' and Date in (select min(`Date`) from Signal_History where tidm = '%s' and Date > '%s')" % (tidm, tidm, d1date))
                
@@ -110,7 +121,7 @@ if 1==1:
                else:
                    for z in d1maxdate["data"]:
                         MaxDate = datetime.datetime.strptime(z[0], "%Y-%m-%d").date()
-                        MaxPrice = float(z[1].replace(",", ""))
+                        MaxPrice = z[1]
            #print MinDate
            #print MinPrice
            #print MaxDate
@@ -208,8 +219,8 @@ if 1==0:
     #scraperwiki.sqlite.execute("alter table company rename column `Date Added` to `Last Refreshed`")
     #scraperwiki.sqlite.execute("alter table company add `Top 500` char(1)")
     
-    scraperwiki.sqlite.execute("drop table if exists company")  
-    scraperwiki.sqlite.execute("create table company (`TIDM` string, `Company` string, `Price` real, `Volume` real, `Date` date NOT NULL)")
+    #scraperwiki.sqlite.execute("drop table if exists company")  
+    #scraperwiki.sqlite.execute("create table company (`TIDM` string, `Company` string, `Price` real, `Volume` real, `Date` date NOT NULL)")
     #scraperwiki.sqlite.execute("drop table if exists Signal_History")  
     #scraperwiki.sqlite.execute("create table Signal_History (`ASX code` varchar2(8) NOT NULL, `Date` date NOT NULL, `Price` real NOT NULL, `Signal` varchar2(15) NOT NULL, `Confirmation` char(1) NOT NULL, `AUD 100` real NOT NULL, UNIQUE (`ASX code`, `Date`))")
     
@@ -318,7 +329,7 @@ if 1==0:
 #------------------------------------------------
 #------------------------------------------------
 
-if 1==0:
+if 1==1:
 
     url = 'https://www.britishbulls.com/SignalPage.aspx?lang=en&Ticker='
     
@@ -428,10 +439,10 @@ if 1==0:
                     #sh_Date = substr(sh_Date, 7,4) + '-' + substr(sh_Date, 4,2) + '-' + substr(sh_Date, 1,2)
                     #sh_Date = sh_Date[6:10] + '-' + sh_Date[3:5] + '-' + sh_Date[:2]
                     sh_Date = date(int(sh_Date[6:10]),int(sh_Date[3:5]),int(sh_Date[:2]))
-                    sh_Price = re.search("(\w|\d)(.*)(\w|\d)", str(test3.pop(0)).replace(" ", "")).group(0)
+                    sh_Price = re.search("(\w|\d)(.*)(\w|\d)", str(test3.pop(0)).replace(" ", "").replace(",", "")).group(0)
                     sh_Signal = re.search("(\w|\d)(.*)(\w|\d)", str(test3.pop(0)).replace(" ", "")).group(0)
-                    sh_Confirmation = (re.search("[Unc|C]heck", str(test3.pop(0)).replace(" ", "")).group(0).lower().replace("uncheck","N")).replace("check", "Y")
-                    sh_GBP100 = re.search("(\w|\d)(.*)(\w|\d)", str(test3.pop(0)).replace(" ", "")).group(0)
+                    sh_Confirmation = (re.search("[/Unc|/C]heck", str(test3.pop(0)).replace(" ", "")).group(0).lower().replace("/uncheck","N")).replace("/check", "Y")
+                    sh_GBP100 = re.search("(\w|\d)(.*)(\w|\d)", str(test3.pop(0)).replace(" ", "").replace(",", "")).group(0)
             
             #scraperwiki.sqlite.execute("insert or replace into Signal_History values (:`ASX code`, :Date, :Price, :Signal, :Confirmation, :`AUD 100`)",  {"ASX code":ASX_Code, "Date":sh_Date, "Price":sh_Price, "Signal":sh_Signal, "Confirmation":sh_Confirmation, "AUD 100":sh_AUD100})
     
