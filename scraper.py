@@ -51,6 +51,8 @@ if 1==1:
                    LatestPrice = b[2]
                    LatestSignal = b[3]
        
+                   print 'nprice %f' % (nprice) 
+                   print 'LatestPrice %f' % (LatestPrice)
                    ldiff = (nprice - LatestPrice) / LatestPrice
            
                    if LatestSignal == 'BUY':
