@@ -62,7 +62,7 @@ if 1==1:
                    LatestPrice = b[2]
                    LatestSignal = b[3]
        
-                   print 'nprice %s' % (nprice) 
+                   print 'nprice %f' % (nprice) 
                    print 'LatestPrice %s' % (LatestPrice) 
                    ldiff = (nprice - LatestPrice) / LatestPrice
            
