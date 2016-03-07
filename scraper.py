@@ -13,7 +13,8 @@ import datetime
 if 1==1: 
  
    #complist = scraperwiki.sqlite.execute("select `TIDM`, `Price`, `Date` from company where TIDM in (select distinct TIDM from Signal_History)")
-   complist = scraperwiki.sqlite.execute("select `TIDM`, `Price`, `Date` from company where tidm = 'III.L'")
+   #complist = scraperwiki.sqlite.execute("select `TIDM`, `Price`, `Date` from company where tidm = 'III.L'")
+   complist = scraperwiki.sqlite.execute("select `TIDM`, `Price`, `Date` from company'")
 
 #Tmp1=0.0
         
