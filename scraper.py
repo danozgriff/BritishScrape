@@ -23,8 +23,8 @@ import datetime
 
 if 1==1: 
  
-   complist = scraperwiki.sqlite.execute("select `TIDM`, `Price`, `Date` from company where TIDM in (select distinct TIDM from Signal_History)")
-   #complist = scraperwiki.sqlite.execute("select `TIDM`, `Price`, `Date` from company where tidm = 'III.L'")
+   #complist = scraperwiki.sqlite.execute("select `TIDM`, `Price`, `Date` from company where TIDM in (select distinct TIDM from Signal_History)")
+   complist = scraperwiki.sqlite.execute("select `TIDM`, `Price`, `Date` from company where tidm = 'SIG.L'")
    #complist = scraperwiki.sqlite.execute("select `TIDM`, `Price`, `Date` from company")
 
 #Tmp1=0.0
@@ -62,8 +62,8 @@ if 1==1:
                    LatestPrice = b[2]
                    LatestSignal = b[3]
        
-                   #print 'nprice %f' % (nprice) 
-                   #print LatestPrice
+                   print 'nprice %s' % (nprice) 
+                   print 'LatestPrice %s' % (LatestPrice) 
                    ldiff = (nprice - LatestPrice) / LatestPrice
            
                    if LatestSignal == 'BUY':
