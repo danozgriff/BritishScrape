@@ -80,7 +80,7 @@ if 1==1:
                        tprice = LatestGDP100*.994
                #print 'Current Calc GDP 100:'
                #print tdate
-               print "Latest: %s: %s" % (tdate, tprice)
+               print "Latest: %s: $%s" % (tdate, round(tprice,2))
                #print tprice
                #print "Latest Date %s" % (tdate)
 #------------------------------------------------------------
@@ -156,7 +156,7 @@ if 1==1:
            #print "Belowdelta %f" % (Belowdelta.days)
            #print "CalcPrice %f" % (CalcPrice)
            #print tprice
-           print "Latest - 10: %s: %s %s" % (d1date, CalcPrice, round(D1PC,2))
+           print "Latest - 10: %s: $%s %s%" % (d1date, round(CalcPrice,2), round(D1PC*100,1))
            print " "
            #print "d1date %s" % (d1date)
            #print "D1PC %f" % (D1PC) 
