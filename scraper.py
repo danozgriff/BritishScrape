@@ -156,8 +156,8 @@ if 1==1:
            #print "Belowdelta %f" % (Belowdelta.days)
            #print "CalcPrice %f" % (CalcPrice)
            #print tprice
-           print "Latest - 10: %s: $%s %s" % (d1date, round(CalcPrice,2), round(D1PC*100,1))
-           print " "
+       print "Latest - 10: %s: $%s %s" % (d1date, round(CalcPrice,2), round(D1PC*100,1))
+       print " "
            #print "d1date %s" % (d1date)
            #print "D1PC %f" % (D1PC) 
            #print 'Delta: %d' % (delta.days)
