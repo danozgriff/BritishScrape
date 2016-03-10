@@ -33,8 +33,8 @@ if 1==1:
        #Tmp1=tmp1+x[1]
        #tidm=x[0]
        tidm=x[0]
-       print tidm
-       nprice=x[1]
+       #print tidm
+       #nprice=x[1]
        tdate=datetime.datetime.strptime(x[2], "%Y-%m-%d").date()
       # ndate=dt.datetime.today().strftime("%Y/%m/%d")
        todaydate=datetime.date.today()
@@ -42,7 +42,7 @@ if 1==1:
        
        Commission=0.994
 
-# Find Today
+# Find Today GDP100
 
        ldata = scraperwiki.sqlite.execute("select `Price` from Signal_History where tidm = '%s' and Date = '%s'" % (tidm, tdate))
        if len(ldata["data"]) != 0:
@@ -62,8 +62,8 @@ if 1==1:
                    LatestPrice = b[2]
                    LatestSignal = b[3]
        
-                   print nprice
-                   print 'LatestPrice %s' % (LatestPrice) 
+                   #print nprice
+                   #print 'LatestPrice %s' % (LatestPrice) 
                    ldiff = (nprice - LatestPrice) / LatestPrice
            
                    if LatestSignal == 'BUY':
@@ -78,9 +78,11 @@ if 1==1:
                    #SELL etc
                    else:
                        tprice = LatestGDP100*.994
-               print 'Current Calc GDP 100:'
-               print tdate
-               print tprice
+               #print 'Current Calc GDP 100:'
+               #print tdate
+               print "Latest: %s: %s" % (tdate, tprice)
+               #print tprice
+               #print "Latest Date %s" % (tdate)
 #------------------------------------------------------------
 
 #D-1   
@@ -99,8 +101,8 @@ if 1==1:
            for a in d1list["data"]: 
                MatchDate = a[0]
                MatchPrice = a[1]
-               print MatchDate
-               print MatchPrice 
+               #print MatchDate
+               #print MatchPrice 
        else:        
            #d1maxdate = scraperwiki.sqlite.execute("select max(`Date`) from Signal_History where tidm = '%s' and Date < '%s'" % (tidm, d1date))
            d1mindate = scraperwiki.sqlite.execute("select `Date`, `GBP 100` from Signal_History where tidm = '%s' and Date in (select max(`Date`) from Signal_History where tidm = '%s' and Date < '%s')" % (tidm, tidm, d1date))
@@ -139,23 +141,25 @@ if 1==1:
                PriceInterval = PriceDelta / MinMaxDelta.days
            
            if abs(Abovedelta.days) >= Belowdelta.days:
-               print "below"
+               #print "below"
                CalcPrice = MinPrice+Belowdelta.days*PriceInterval
            else:
-               print "above"
+               #print "above"
                CalcPrice = MaxPrice-Abovedelta.days*PriceInterval
                
            D1PC = (tprice - CalcPrice) / CalcPrice
            
-           print "mindate %s" % (MinDate)
-           print "MaxDate %s" % (MaxDate)
-           print "MinPrice %f" % (MinPrice)
-           print "PriceInterval %f" % (PriceInterval)
-           print "Belowdelta %f" % (Belowdelta.days)
-           print "CalcPrice %f" % (CalcPrice)
+           #print "mindate %s" % (MinDate)
+           #print "MaxDate %s" % (MaxDate)
+           #print "MinPrice %f" % (MinPrice)
+           #print "PriceInterval %f" % (PriceInterval)
+           #print "Belowdelta %f" % (Belowdelta.days)
+           #print "CalcPrice %f" % (CalcPrice)
            #print tprice
-           print "d1date %s" % (d1date)
-           print "D1PC %f" % (D1PC) 
+           print "Latest - 10: %s: %s %s" % (d1date, CalcPrice, round(D1PC,2))
+           print " "
+           #print "d1date %s" % (d1date)
+           #print "D1PC %f" % (D1PC) 
            #print 'Delta: %d' % (delta.days)
 
 
