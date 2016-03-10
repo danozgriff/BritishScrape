@@ -144,7 +144,7 @@ if 1==1:
                #print "below"
                CalcPrice = MinPrice+Belowdelta.days*PriceInterval
            else:
-               #print "above"
+               print "above"
                CalcPrice = MaxPrice-Abovedelta.days*PriceInterval
                
            D1PC = (tprice - CalcPrice) / CalcPrice
