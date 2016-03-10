@@ -34,7 +34,7 @@ if 1==1:
        #tidm=x[0]
        tidm=x[0]
        #print tidm
-       #nprice=x[1]
+       nprice=x[1]
        tdate=datetime.datetime.strptime(x[2], "%Y-%m-%d").date()
       # ndate=dt.datetime.today().strftime("%Y/%m/%d")
        todaydate=datetime.date.today()
