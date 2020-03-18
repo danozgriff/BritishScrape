@@ -33,7 +33,7 @@ if 1==1:
        #Tmp1=tmp1+x[1]
        #tidm=x[0]
        tidm=x[0]
-       print tidm
+       print(tidm)
        nprice=x[1]
        tdate=datetime.datetime.strptime(x[2], "%Y-%m-%d").date()
       # ndate=dt.datetime.today().strftime("%Y/%m/%d")
@@ -80,7 +80,7 @@ if 1==1:
                        tprice = LatestGDP100*.994
                #print 'Current Calc GDP 100:'
                #print tdate
-               print "Latest: %s: $%s" % (tdate, round(tprice,2))
+               print("Latest: %s: $%s" % (tdate, round(tprice,2)))
                #print tprice
                #print "Latest Date %s" % (tdate)
 #------------------------------------------------------------
@@ -156,8 +156,8 @@ if 1==1:
            #print "Belowdelta %f" % (Belowdelta.days)
            #print "CalcPrice %f" % (CalcPrice)
            #print tprice
-       print "Latest - 10: %s: $%s %s" % (d1date, round(CalcPrice,2), round(D1PC*100,1))
-       print " "
+       print("Latest - 10: %s: $%s %s" % (d1date, round(CalcPrice,2), round(D1PC*100,1)))
+       print(" ")
            #print "d1date %s" % (d1date)
            #print "D1PC %f" % (D1PC) 
            #print 'Delta: %d' % (delta.days)
@@ -191,8 +191,8 @@ if 1==0:
      ndate=datetime.date.today()
      datetime.date.today()
      d1date=ndate - datetime.timedelta(days=10)
-     print d1date
-     print "select `TIDM`, strftime('%m',Date,'unixepoch') from Signal_History where tidm = '" + tidm + "' and Date < '%s-%s-%s'" % (d1date.strftime('%Y'), d1date.strftime('%m'), d1date.strftime('%d'))
+     print(d1date)
+     print("select `TIDM`, strftime('%m',Date,'unixepoch') from Signal_History where tidm = '" + tidm + "' and Date < '%s-%s-%s'" % (d1date.strftime('%Y'), d1date.strftime('%m'), d1date.strftime('%d')))
      #ndate=datetime.date.today()
      #print ndate.year
      #strftime('%Y', ndate)
@@ -288,7 +288,7 @@ if 1==0:
                 poscnt = poscnt + 1    
             
             
-        print count
+        print(count)
             #print re.search('', (.*?)', match).group()
             #print re.search(r'(\">|\'>)(.*?)', match).group(1)
             #print re.search(r'', (\.*\?)', match)
