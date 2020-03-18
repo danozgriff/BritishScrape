@@ -1,4 +1,4 @@
-import scraperwiki
+import scraperwiki, urllib2
 import mechanize
 import re
 import csv
