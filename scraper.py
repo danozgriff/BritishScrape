@@ -5,7 +5,6 @@ import csv
 import time
 from datetime import datetime, date
 import datetime
-from urllib.request import urlopen
 #import sqlite3
 
 
