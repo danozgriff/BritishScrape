@@ -21,7 +21,7 @@ import datetime
          
      #    scraperwiki.sqlite.execute("update Signal_History set `Price` = %f where tidm = '%s' and Date = '%s'" % (tidm, tdate))
 
-if 1==1: 
+if 1==0: 
  
    complist = scraperwiki.sqlite.execute("select `TIDM`, `Price`, `Date` from company where TIDM in (select distinct TIDM from Signal_History)")
    #complist = scraperwiki.sqlite.execute("select `TIDM`, `Price`, `Date` from company where tidm = 'SIG.L'")
@@ -199,7 +199,7 @@ if 1==0:
 #------------------------------------------------
 #------------------------------------------------
 
-if 1==0:
+if 1==1:
 
     url = 'http://www.shareprices.com/ftseallshare'
     
