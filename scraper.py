@@ -12,7 +12,7 @@ import time
 
 #if 1==1:
 
-url = 'http://www.shareprices.com/ftseallshare'
+url = 'https://shareprices.com/indices/ftse100'
   
 
 br = mechanize.Browser()
