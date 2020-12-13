@@ -10,6 +10,8 @@ import time
 import pytz
 
 
+au_tz = pytz.timezone('Australia/Perth')
+
 if 1==1:
 
     urllist = ["https://shareprices.com/indices/ftse100"]
