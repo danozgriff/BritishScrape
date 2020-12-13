@@ -44,7 +44,7 @@ htmlcontent = page.read()
 soup = BeautifulSoup(htmlcontent, features="lxml")
 
 
-
+print htmlcontent
 test1 = re.search(r'Day\'s Volume(.*?)<br \/><\/div>', htmlcontent).group()
 tuples = re.findall(r'(\">|\'>)(.*?)<\/', str(test1.replace(" ", "")).replace("><", ""))
 count = 0
