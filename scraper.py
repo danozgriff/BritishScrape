@@ -7,71 +7,76 @@ from datetime import datetime, date, time
 # generate random integer values
 import time    
 #from random import seed, randint
-#import pytz
+import pytz
 
 
-#if 1==1:
+if 1==1:
 
-url = 'https://shareprices.com/indices/ftse100'
-  
-
-br = mechanize.Browser()
-cj = cookielib.LWPCookieJar()
-br.set_cookiejar(cj)
-br.set_handle_equiv(True)
-br.set_handle_redirect(True)
-br.set_handle_robots(False)
-br.set_handle_refresh(mechanize._http.HTTPRefreshProcessor(), max_time=1)
-# sometimes the server is sensitive to this information
-br.addheaders = [('User-agent','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.72 Safari/537.36')]
-
-# sometimes the server is sensitive to this information
-br.addheaders = [('User-agent', 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.1) Gecko/2008071615 Fedora/3.0.1-1.fc9 Firefox/3.0.1')]
+    urllist = ["https://shareprices.com/indices/ftse100"]
+    for url in urllist:
+    
+        br = mechanize.Browser()
+        cj = cookielib.LWPCookieJar()
+        br.set_cookiejar(cj)
+        br.set_handle_equiv(True)
+        br.set_handle_redirect(True)
+        br.set_handle_robots(False)
+        br.set_handle_refresh(mechanize._http.HTTPRefreshProcessor(), max_time=1)
+            # sometimes the server is sensitive to this information
+        br.addheaders = [('User-agent','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.72 Safari/537.36')]
 
 
 
-scraperwiki.sqlite.execute("drop table if exists company")  
-scraperwiki.sqlite.execute("create table company (`TIDM` string, `Company` string, `Price` real, `Volume` real, `Date` date NOT NULL)")
-
-#scraperwiki.sqlite.execute("insert into company values ('test', 'test', 'test', date('2015-12-07'), 'Y')")
-scraperwiki.sqlite.execute("delete from company")
-scraperwiki.sqlite.commit()
+        scraperwiki.sqlite.execute("drop table if exists company")  
+        scraperwiki.sqlite.execute("create table company (`Code` string NOT NULL, `Company` string, `Price` real, `Change` real, `Perc_Change` real,  `Days_Volume` integer, `EOD_Date` string NOT NULL, UNIQUE (`Code`, `EOD_Date`))")
+        #scraperwiki.sqlite.execute("delete from company")  
 
 
-
-page = br.open(url)
-htmlcontent = page.read()
-soup = BeautifulSoup(htmlcontent, features="lxml")
-
+        page = br.open(url)
+        htmlcontent = page.read()
+        soup = BeautifulSoup(htmlcontent, features="lxml")
 
 
+        #eoddate = soup.findAll("div", {"class": "header-timestamp"})[0].text[-11:].replace(" ", "-")
+        #date_obj = datetime.strptime(eoddate, '%d-%b-%Y')
+        
+        eoddate = datetime.now(tz=au_tz).strftime("%Y-%m-%d %H:%M:%S")
+        
+        #eoddateint = int(date_obj.strftime('%Y%m%d'))
 
-#print htmlcontent
-test1 = re.search(r'Day\'s Volume(.*?)indices', htmlcontent).group()
-#test1 = re.search(r'Day\'s Volume(.*?)<br \/><\/div>', htmlcontent).group()
-tuples = re.findall(r'(\">|\'>)(.*?)<\/', str(test1.replace(" ", "")).replace("><", ""))
-count = 0
-tidm = ""
-company = ""
-price = 0
-poscnt = 0
-for tuple in tuples:
-	if poscnt == 1:
-		company = tuple[1].replace("amp;", "")
+        table = soup.find( "table", {"id":"indices__constituents-table sortable"} )
 
-	if poscnt == 2:
-		price = tuple[1].replace(",", "").replace("p", "")
-	if poscnt == 4:
-		scraperwiki.sqlite.save(["TIDM"], data={"TIDM":tidm+'.L', "Company":company, "Price":price, "Volume":tuple[1].replace(",", ""), "Date":datetime.date.today()}, table_name='company')
-		scraperwiki.sqlite.commit()
-	if len(tuple[1]) <= 4 and tuple[1][-1:].isalpha() and tuple[1][-1:].isupper() and tuple[1]!=tidm and poscnt!=1:
-		count = count+1
+        output_rows = []
+        for table_row in table.findAll('tr'):
+            columns = table_row.findAll('td')
+            output_row = []
+            for column in columns:
+                output_row.append(column.text + ",")
+            output_rows.append(output_row)
 
-		tidm = tuple[1]
-		poscnt = 1
-	else:
-		poscnt = poscnt + 1    
-		
-		
-	print(count)
-		#print re.search('', (.*?)', match).group()
+
+        for sublst in output_rows:
+            if len(sublst) > 0:
+                #rank = sublst[0].replace(",", "")
+                tidm = sublst[0].replace(",", "") 
+                company = sublst[1].replace(",", "") 
+                price = sublst[2].replace(",", "").replace("$", "") 
+                change = sublst[3].replace(",", "").replace("+", "")    
+                perchg = round(float(sublst[4].replace(",", "").replace("+", "").replace("%", "").strip('"'))/100.0, 4)
+                daysvolume = sublst[5].replace(",", "")              
+                
+                #yrperchg = round(float(sublst[8].replace(",", "").replace("+", "").replace("%", "").strip('"'))/100.0, 4)                                                                                                 
+                #marketcap = sublst[7].replace(",", "").replace("$", "").replace(".", "").replace(" B", "0000000").replace(" M", "0000").replace(" TH", "0")    
+
+                scraperwiki.sqlite.execute("insert or ignore into company values (?, ?, ?, ?, ?, ?, ?, ?, ?)",  [tidm, company, price, change, perchg, daysvolume, eoddate]) 
+
+    
+        scraperwiki.sqlite.commit() 
+    
+    #scraperwiki.sqlite.execute("drop table if exists Company_List") 
+    #scraperwiki.sqlite.execute("create table Company_List (`Code` varchar2(8) NOT NULL, `Company` varchar2(100) NOT NULL, `Date_Added` date NOT NULL, UNIQUE (`Code`))")  
+    #scraperwiki.sqlite.execute("insert or ignore into Company_List SELECT DISTINCT code, company, ? from company where rank <= 300", [eoddate])
+
+
+    #scraperwiki.sqlite.commit()  
+
