@@ -47,6 +47,8 @@ if 1==1:
         #eoddateint = int(date_obj.strftime('%Y%m%d'))
 
         table = soup.find( "table", {"id":"indices__constituents-table sortable"} )
+        
+        print table
 
         output_rows = []
         for table_row in table.findAll('tr'):
